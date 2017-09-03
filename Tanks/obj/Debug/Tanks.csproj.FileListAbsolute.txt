@@ -12,3 +12,17 @@ C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.exe
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.pdb
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\bin\Debug\Tanks.exe.config
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.exe
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.pdb
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\bin\Debug\Tanks.exe
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\bin\Debug\Tanks.pdb
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.csprojResolveAssemblyReference.cache
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\MainWindow.g.cs
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\App.g.cs
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks_MarkupCompile.cache
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks_MarkupCompile.lref
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\MainWindow.baml
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.g.resources
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.Properties.Resources.resources
+C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache

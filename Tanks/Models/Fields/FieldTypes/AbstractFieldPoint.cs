@@ -14,32 +14,25 @@ namespace Tanks.Models.Fields
    // [AddINotifyPropertyChangedInterface]
     abstract class AbstractField
     {
-        FieldPointState fieldPointState;
+        public FieldPointState FieldPointState { get; set; }
+        public int x, y = 0;
 
-        public Control UiElement { get; set; }
-        public FieldPointState FieldPointState
+        public AbstractField(int x,int y,FieldPointState state)
         {
-            get
-            { return fieldPointState; }
-            set
-            {
-                fieldPointState = value;
-                OnFieldPointStateChanged();
-            }
-        }
-
-
-
-        public AbstractField(Control uiElement,FieldPointState state)
-        {
-            this.UiElement = uiElement;
+            this.x = x;
+            this.y = y;
             this.FieldPointState = state;
         }
 
        
-        private void OnFieldPointStateChanged()
+        //private void OnFieldPointStateChanged()
+        //{
+        //    UiElement.Background = new SolidColorBrush((Color)FieldsDictionary.GetDictionaryElement(this.FieldPointState,DictionaryType.Color));
+        //}
+
+        public void MoveUp()
         {
-            UiElement.Background = new SolidColorBrush((Color)FieldsDictionary.GetDictionaryElement(this.FieldPointState,DictionaryType.Color));
+
         }
 
 
