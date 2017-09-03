@@ -10,7 +10,7 @@ namespace Tanks.Models.Fields
 {
     class TankField : AbstractField
     {
-        public TankField(Control uiElement) : base(uiElement, FieldPointState.TankField)
+        public TankField(int x, int y, Control uiElement) : base(x,y,uiElement, FieldPointState.TankField)
         {
         }
     }

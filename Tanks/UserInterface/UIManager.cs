@@ -12,6 +12,47 @@ namespace Tanks.UserInterface
     {
         public static int ControlSize => 25;
 
+        public static T[,] CreateMatrix<T>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control
+        {
+            T[,] space = new T[x, y];
+
+            // Add columns X
+            for (int i = 0; i < x; i++)
+            {
+                ColumnDefinition columnDef = new ColumnDefinition();
+                columnDef.Width = new GridLength(ControlSize);
+                parrent.ColumnDefinitions.Add(columnDef);
+            }
+
+            // Add rows Y
+            for (int i = 0; i < y; i++)
+            {
+                RowDefinition rowDef = new RowDefinition();
+                rowDef.Height = new GridLength(ControlSize);
+                parrent.RowDefinitions.Add(rowDef);
+            }
+
+            // Add to UI Elements to Parrent
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    T uiElement = (T)Activator.CreateInstance(typeof(T));
+
+                    modify?.Invoke(uiElement);
+
+                    Grid.SetColumn(uiElement, i);
+                    Grid.SetRow(uiElement, j);
+                    parrent.Children.Add(uiElement);
+
+                    // Assign Field
+                    space[i, j] = uiElement;
+                }
+            }
+
+            return space;
+        }
+
         public static AbstractField[,] CreateMatrix<T, FieldType>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
         {
             AbstractField[,] space = new AbstractField[x, y];
@@ -46,7 +87,7 @@ namespace Tanks.UserInterface
                     parrent.Children.Add(uiElement);
 
                     // Assign Field
-                    space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType), uiElement);
+                    space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType),i,j,uiElement);
                 }
             }
 
@@ -88,7 +129,7 @@ namespace Tanks.UserInterface
                     parrent.Children.Add(uiElement);
 
                     // Assign Field
-                    space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType), uiElement);
+                    space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType),i,j, uiElement);
                 }
             }
 

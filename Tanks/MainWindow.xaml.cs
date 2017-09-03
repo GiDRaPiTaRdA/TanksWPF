@@ -27,13 +27,19 @@ namespace Tanks
         {
             InitializeComponent();
 
-            DataContext = new ViewModel();
+            var UiMatrix = UIManager.CreateMatrix<Label>(
+               10,
+               10,
+               ParrentGrid,
+               control => {
+                   control.MouseEnter += (o, s) => control.Background = new SolidColorBrush(Colors.Blue);
+                   control.Background = new SolidColorBrush(Colors.WhiteSmoke);
+               });
 
-            UIManager.CreateMatrix<Button,EmptyField>(25, 25, ParrentGrid,(control)=> 
-            {
-               // control.IsEnabled = false;
-                control.MouseLeave += (o,s)=> control.Background = new SolidColorBrush(Colors.Blue);
-            });
+            DataContext = new ViewModel(UiMatrix);
+
+           
+
         }
 
 
