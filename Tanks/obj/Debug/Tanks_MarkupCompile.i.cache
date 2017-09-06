@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\
 Tanks
 none
 false
 DEBUG;TRACE
-C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\App.xaml
-11151548125
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\App.xaml
+21852180077
 
-191944225130
-661583808004
-MainWindow.xaml;
+201493871575
+661459407140
+Themes\Generic.xaml;View\MainWindow.xaml;
 
-True
+False
 

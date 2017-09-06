@@ -11,11 +11,6 @@ namespace Tanks.Models.Fields
     {
         public Control[,] ControlsMainField { get; set; }
 
-        public BattleField(int x,int y)
-        {
-            this.ControlsMainField = new EmptyField[x,y];
-        }
-
         public BattleField(Control[,] mainField)
         {
             this.ControlsMainField = mainField;

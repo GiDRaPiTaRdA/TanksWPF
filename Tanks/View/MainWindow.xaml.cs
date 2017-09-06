@@ -27,25 +27,7 @@ namespace Tanks
         {
             InitializeComponent();
 
-            var UiMatrix = UIManager.CreateMatrix<Label>(
-               10,
-               10,
-               ParrentGrid,
-               control => {
-                   control.MouseEnter += (o, s) => control.Background = new SolidColorBrush(Colors.Blue);
-                   control.Background = new SolidColorBrush(Colors.WhiteSmoke);
-               });
-
-            DataContext = new ViewModel(UiMatrix);
-
-           
-
-        }
-
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-           // TankField emptyPoint = new TankField((Button)sender);
+            DataContext = new ViewModel();
         }
     }
 }

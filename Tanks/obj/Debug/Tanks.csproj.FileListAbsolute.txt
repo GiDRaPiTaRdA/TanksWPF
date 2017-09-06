@@ -2,11 +2,9 @@ c:\users\maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks.exe
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks.pdb
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.csprojResolveAssemblyReference.cache
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\MainWindow.g.cs
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\App.g.cs
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks_MarkupCompile.cache
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks_MarkupCompile.lref
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\MainWindow.baml
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.g.resources
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.Properties.Resources.resources
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache
@@ -26,3 +24,7 @@ C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\MainWindow.baml
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.g.resources
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.Properties.Resources.resources
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\MainWindow.g.cs
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\MainWindow.baml
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Themes\Generic.baml

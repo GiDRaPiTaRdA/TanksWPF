@@ -14,11 +14,12 @@ namespace Tanks
 
         public int FPS => 60;
 
-        public BattleField BattleField { get; set; }
+        public bool [,] Flags { get; set; }
 
-        public ViewModel(Control[,] controls)
+        public ViewModel()
         {
-            this.BattleField = new BattleField(controls);
+            this.Flags = new bool[10,10];
+            this.Flags[0, 1] = true;
         }
 
     }
