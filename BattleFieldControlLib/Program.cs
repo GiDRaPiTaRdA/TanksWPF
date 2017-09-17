@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tanks.Models
+namespace BattleFieldControlLib
 {
-    public enum FieldPointState
+    class Program
     {
-        EmptyField,
-        TankField
+        static void Main(string[] args)
+        {
+        }
     }
 }

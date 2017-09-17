@@ -8,14 +8,14 @@ using System.Windows.Media;
 
 namespace Tanks.Models.Dictionary
 {
-    static class FieldsDictionary
+    static class ResourcesDictionary
     {
         [PointType(FieldPointState.EmptyField,DictionaryType.Color)] public static Color FPColorEmpty => Colors.White;
         [PointType(FieldPointState.TankField, DictionaryType.Color)] public static Color FPColorTank => Colors.Black;
 
         public static object GetDictionaryElement(FieldPointState state,DictionaryType key)
         {
-            var propsInfo = typeof(FieldsDictionary).GetProperties()
+            var propsInfo = typeof(ResourcesDictionary).GetProperties()
                 .Where(
                 p => p.GetCustomAttribute<PointTypeAttribute>().Key == key &&
                 p.GetCustomAttribute<PointTypeAttribute>().State == state

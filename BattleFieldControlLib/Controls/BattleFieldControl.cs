@@ -46,22 +46,9 @@ namespace Tanks.View.Controls
 
         private void BattleFieldControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ControlsMatrix = UIManager.CreateMatrix<Button>(this.SizeX, this.SizeY, this, (c)=> c.PreviewMouseUp += C_MouseLeftButtonDown);
+            ControlsMatrix = UIManager.CreateMatrix<Button>(this.SizeX, this.SizeY, this);
 
             Initialize();
-        }
-
-        private void C_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ControlsMatrix.Traversal(
-                (o, ps) =>
-                {
-                    if(o == sender)
-                    {
-                        SpotsMatrix[ps[0], ps[1]].Field = new Models.Fields.EmptyField(ps[0], ps[1]);
-                    }
-                }
-                );
         }
 
         public int SizeX => SpotsMatrix.GetLength(0);

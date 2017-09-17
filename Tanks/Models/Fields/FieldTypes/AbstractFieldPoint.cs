@@ -12,42 +12,18 @@ using Tanks.Models.Dictionary;
 namespace Tanks.Models.Fields
 {
    // [AddINotifyPropertyChangedInterface]
-    abstract class AbstractField
+   public abstract class AbstractField
     {
-        public FieldPointState FieldPointState { get; set; }
-        public int x, y = 0;
+        public FieldPointState FieldPointState { get; }
 
-        public AbstractField(int x,int y,FieldPointState state)
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public AbstractField(int x, int y, FieldPointState state)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             this.FieldPointState = state;
         }
-
-       
-        //private void OnFieldPointStateChanged()
-        //{
-        //    UiElement.Background = new SolidColorBrush((Color)FieldsDictionary.GetDictionaryElement(this.FieldPointState,DictionaryType.Color));
-        //}
-
-        public void MoveUp()
-        {
-
-        }
-
-
-        //public FieldPointState FieldPointState
-        //{
-        //    get
-        //    {
-        //        return fieldPointState;
-        //    }
-        //    set
-        //    {
-        //        fieldPointState = value;
-        //        OnFieldPointStateChanged();
-        //    }
-        //}
-
     }
 }

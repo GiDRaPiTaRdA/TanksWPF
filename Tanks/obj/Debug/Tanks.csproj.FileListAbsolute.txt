@@ -28,3 +28,5 @@ C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\MainWindow.baml
 C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Themes\Generic.baml
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\TraversalLib.dll
+C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\TraversalLib.pdb

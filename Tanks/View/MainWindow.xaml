@@ -16,15 +16,14 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <StackPanel>
+    
     <controls:BattleFieldControl
          HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        
-        SizeX="10"
-        SizeY="10"
-        
-         TestProp="{Binding Path=Flags}">
-        
-    </controls:BattleFieldControl>
-    
+        SpotsMatrix ="{Binding Path=BattleField.SpotsMatrix}"
+        />
+        <Button Name="butt" Height="50" Width="50" Click="butt_Click"/>
+    </StackPanel>
+
 </Window>

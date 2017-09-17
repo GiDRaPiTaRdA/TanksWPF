@@ -53,6 +53,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TraversalLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TraversalLib\bin\Debug\TraversalLib.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -62,15 +66,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\FieldWrapper.cs" />
     <Compile Include="View\Controls\BattleFieldControl.cs" />
     <Compile Include="Models\Fields\BattleField.cs" />
     <Compile Include="Models\Dictionary\DictionaryType.cs" />
     <Compile Include="Models\Fields\FieldTypes\AbstractFieldPoint.cs" />
     <Compile Include="Models\FieldPointState.cs" />
     <Compile Include="Models\Fields\FieldTypes\EmptyField.cs" />
-    <Compile Include="Models\Dictionary\PointsDictionary.cs" />
+    <Compile Include="Models\Dictionary\ResourcesDictionary.cs" />
     <Compile Include="Models\Fields\FieldTypes\TankField.cs" />
-    <Compile Include="Models\PointTypeAttribute.cs" />
+    <Compile Include="Models\Dictionary\PointTypeAttribute.cs" />
     <Compile Include="View\UserInterface\UIManager.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Themes\Generic.xaml">

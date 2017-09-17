@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -13,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tanks.Models;
+using Tanks.Models.Dictionary;
 using Tanks.Models.Fields;
 using Tanks.UserInterface;
 
@@ -28,6 +31,12 @@ namespace Tanks
             InitializeComponent();
 
             DataContext = new ViewModel();
+        }
+
+        private void butt_Click(object sender, RoutedEventArgs e)
+        {
+            Random r = new Random();
+            ((ViewModel)DataContext).BattleField.SetSlot(new TankField(r.Next(10), r.Next(10)));
         }
     }
 }
