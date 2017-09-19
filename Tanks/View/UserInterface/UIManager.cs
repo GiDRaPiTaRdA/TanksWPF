@@ -10,9 +10,14 @@ namespace Tanks.UserInterface
 {
     class UIManager
     {
-        public static int ControlSize => 25;
+        public int ControlSize { get; set; }
 
-        public static T[,] CreateMatrix<T>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control
+        public UIManager(int controlSize = 25)
+        {
+            this.ControlSize = controlSize;
+        }
+
+        public T[,] CreateMatrix<T>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control
         {
             T[,] space = new T[x, y];
 
@@ -53,7 +58,7 @@ namespace Tanks.UserInterface
             return space;
         }
 
-        public static AbstractField[,] CreateMatrix<T, FieldType>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
+        public AbstractField[,] CreateMatrix<T, FieldType>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
         {
             AbstractField[,] space = new AbstractField[x, y];
 
@@ -94,7 +99,7 @@ namespace Tanks.UserInterface
             return space;
         }
 
-        public static AbstractField[,] CreateMatrix<T, FieldType>(AbstractField[,] space, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
+        public AbstractField[,] CreateMatrix<T, FieldType>(AbstractField[,] space, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
         {
             int x = space.GetLength(0);
             int y = space.GetLength(1);
@@ -130,6 +135,20 @@ namespace Tanks.UserInterface
 
                     // Assign Field
                     space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType),i,j, uiElement);
+                }
+            }
+
+            return space;
+        }
+
+        public static T[,] ModifyMatrix<T>(T[,] space, Action<Control> modify = null) where T : Control
+        {
+            // Add to UI Elements to Parrent
+            for (int i = 0; i < space.GetLength(0); i++)
+            {
+                for (int j = 0; j < space.GetLength(1); j++)
+                {
+                    modify?.Invoke(space[i, j]);
                 }
             }
 

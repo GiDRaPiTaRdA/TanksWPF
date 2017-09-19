@@ -10,15 +10,15 @@ namespace Tanks.Models.Dictionary
 {
     static class ResourcesDictionary
     {
-        [PointType(FieldPointState.EmptyField,DictionaryType.Color)] public static Color FPColorEmpty => Colors.White;
-        [PointType(FieldPointState.TankField, DictionaryType.Color)] public static Color FPColorTank => Colors.Black;
+        [ResourceType(FieldState.EmptyField,DictionaryType.Color)] public static Color FPColorEmpty => Colors.White;
+        [ResourceType(FieldState.TankField, DictionaryType.Color)] public static Color FPColorTank => Colors.Black;
 
-        public static object GetDictionaryElement(FieldPointState state,DictionaryType key)
+        public static object GetDictionaryElement(FieldState state,DictionaryType key)
         {
             var propsInfo = typeof(ResourcesDictionary).GetProperties()
                 .Where(
-                p => p.GetCustomAttribute<PointTypeAttribute>().Key == key &&
-                p.GetCustomAttribute<PointTypeAttribute>().State == state
+                p => p.GetCustomAttribute<ResourceTypeAttribute>().Key == key &&
+                p.GetCustomAttribute<ResourceTypeAttribute>().State == state
                 );
 
             if (propsInfo.Count() > 1)

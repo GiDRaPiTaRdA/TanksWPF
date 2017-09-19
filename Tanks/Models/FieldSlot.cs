@@ -20,7 +20,7 @@ namespace Tanks.Models
 
         public AbstractField Field { get; set; }
 
-        public FieldPointState State => Field.FieldPointState;
+        public FieldState State => Field.FieldPointState;
 
         private void OnStateChanged()
         {

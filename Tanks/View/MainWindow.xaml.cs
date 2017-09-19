@@ -18,6 +18,7 @@ using Tanks.Models;
 using Tanks.Models.Dictionary;
 using Tanks.Models.Fields;
 using Tanks.UserInterface;
+using TraversalLib;
 
 namespace Tanks
 {
@@ -26,17 +27,13 @@ namespace Tanks
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
         public MainWindow()
         {
             InitializeComponent();
 
             DataContext = new ViewModel();
-        }
-
-        private void butt_Click(object sender, RoutedEventArgs e)
-        {
-            Random r = new Random();
-            ((ViewModel)DataContext).BattleField.SetSlot(new TankField(r.Next(10), r.Next(10)));
         }
     }
 }

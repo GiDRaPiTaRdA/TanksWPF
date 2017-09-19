@@ -21,19 +21,14 @@ namespace Tanks.View.Controls
 {
     public class BattleFieldControl : Grid
     {
-        public int DefaultSize => 10;
-
-        public Control[,] ControlsMatrix { get; private set; }
-
+        #region Fields
         public static readonly DependencyProperty SpotsMatrixProperty =
-      DependencyProperty.Register(nameof(SpotsMatrix), typeof(FieldSlot[,]), typeof(BattleFieldControl), new UIPropertyMetadata(null));
+         DependencyProperty.Register(nameof(SpotsMatrix), typeof(FieldSlot[,]), typeof(BattleFieldControl), new UIPropertyMetadata(null));
+        #endregion
 
-        public FieldSlot[,] SpotsMatrix
-        {
-            get { return (FieldSlot[,])GetValue(SpotsMatrixProperty); }
-            set { SetValue(SpotsMatrixProperty, value); }
-        }
+        #region Initialization
 
+        #region Constructor
         static BattleFieldControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BattleFieldControl), new FrameworkPropertyMetadata(typeof(BattleFieldControl)));
@@ -43,45 +38,71 @@ namespace Tanks.View.Controls
         { 
             Loaded += BattleFieldControl_Loaded;
         }
+        #endregion
 
         private void BattleFieldControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ControlsMatrix = UIManager.CreateMatrix<Button>(this.SizeX, this.SizeY, this, (c)=> c.PreviewMouseUp += C_MouseLeftButtonDown);
+            // Create control matrix
+            ControlsMatrix = new UIManager(this.ControlSize).CreateMatrix<Label>(this.SizeX, this.SizeY, this);
 
+            // Initialize UI & Bind 
             Initialize();
+
+            // Modify controls
+            UIManager.ModifyMatrix(this.ControlsMatrix, this.ControlModify);
         }
-
-        private void C_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ControlsMatrix.Traversal(
-                (o, ps) =>
-                {
-                    if(o == sender)
-                    {
-                        SpotsMatrix[ps[0], ps[1]].Field = new Models.Fields.EmptyField(ps[0], ps[1]);
-                    }
-                }
-                );
-        }
-
-        public int SizeX => SpotsMatrix.GetLength(0);
-
-        public int SizeY => SpotsMatrix.GetLength(1);
 
         private void Initialize()
         {
+            //Initialize color
             TREXCM.RecursiveTraversal(
                 (os, parms) =>
-                BindAction((FieldSlot)os[0],(Control)os[1]) ,
+                PaintControl((Control)os[1], (FieldSlot)os[0]),
+                SpotsMatrix,
+                ControlsMatrix
+                );
+
+            //Bind
+            TREXCM.RecursiveTraversal(
+                (os, parms) =>
+                BindAction((FieldSlot)os[0], (Control)os[1]),
                 SpotsMatrix,
                 ControlsMatrix
                 );
         }
 
+        private void ControlModify(Control control)
+        {
+            control.Margin = new Thickness(2);
+            control.ToolTip = SpotsMatrix[GetRow(control), GetColumn(control)].Field.ToString();
+        }
+
         private void BindAction(FieldSlot slot, Control control)
         {
-            (slot).StateChanged +=
-                    (o, s) => { control.Background = new SolidColorBrush((Color)ResourcesDictionary.GetDictionaryElement((((SlotEventArgs)s).Field).FieldPointState, DictionaryType.Color)); ; };
+            slot.StateChanged += (o, s) => PaintControl(control, slot);
         }
+
+        private void PaintControl(Control control, FieldSlot slot)
+        {
+            control.Background = new SolidColorBrush((Color)ResourcesDictionary.GetDictionaryElement((slot.Field).FieldPointState, DictionaryType.Color));
+        }
+    
+        #endregion
+
+        #region Properties
+        public int SizeX => SpotsMatrix.GetLength(0);
+
+        public int SizeY => SpotsMatrix.GetLength(1);
+
+        public int ControlSize { get; set; }
+
+        public Control[,] ControlsMatrix { get; private set; }
+
+        public FieldSlot[,] SpotsMatrix
+        {
+            get { return (FieldSlot[,])GetValue(SpotsMatrixProperty); }
+            set { SetValue(SpotsMatrixProperty, value); }
+        }
+        #endregion
     }
 }

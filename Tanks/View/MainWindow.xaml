@@ -16,14 +16,29 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <StackPanel>
-    
-    <controls:BattleFieldControl
-         HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        SpotsMatrix ="{Binding Path=BattleField.SpotsMatrix}"
-        />
-        <Button Name="butt" Height="50" Width="50" Click="butt_Click"/>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=MoveUpCommand}" Key="W" />
+        <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="S" />
+        <KeyBinding Command="{Binding Path=MoveLeftCommand}" Key="A" />
+        <KeyBinding Command="{Binding Path=MoveRightCommand}" Key="D" />
+
+        <KeyBinding Command="{Binding Path=MoveUpCommand}" Key="Up" />
+        <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="Down" />
+        <KeyBinding Command="{Binding Path=MoveLeftCommand}" Key="Left" />
+        <KeyBinding Command="{Binding Path=MoveRightCommand}" Key="Right" />
+    </Window.InputBindings>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center" Background="WhiteSmoke">
+
+            <!--BattleField-->
+            <controls:BattleFieldControl
+                 ControlSize ="25"
+                 HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                SpotsMatrix ="{Binding Path=BattleField.SpotsMatrix}"/>
+
+        </Border>
     </StackPanel>
 
 </Window>

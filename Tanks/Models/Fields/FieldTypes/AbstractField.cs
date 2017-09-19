@@ -14,16 +14,19 @@ namespace Tanks.Models.Fields
    // [AddINotifyPropertyChangedInterface]
    public abstract class AbstractField
     {
-        public FieldPointState FieldPointState { get; }
+        public FieldState FieldPointState { get; }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Coordinates Coordinates { get; set; }
 
-        public AbstractField(int x, int y, FieldPointState state)
+        public AbstractField(Coordinates coordinates, FieldState state)
         {
-            this.X = x;
-            this.Y = y;
+            this.Coordinates = coordinates;
             this.FieldPointState = state;
+        }
+
+        public override string ToString()
+        {
+            return this.Coordinates +" Field state: " + this.FieldPointState;
         }
     }
 }

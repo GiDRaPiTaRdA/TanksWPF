@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tanks.Models
+namespace Tanks.ActionModels
 {
-    public enum FieldPointState
+    public enum Dirrection
     {
-        EmptyField,
-        TankField
+        Forward,
+        Backward,
+        Left,
+        Right
     }
 }
