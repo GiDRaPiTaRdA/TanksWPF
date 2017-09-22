@@ -16,17 +16,19 @@ namespace Tanks.ActionModels.RealModels
         /// X X _
         /// _ X X
         /// </summary>
-        private static FieldState?[,] Map =>
-                (new FieldState?[,]
+        private static FieldState[,] Map =>
+                (new FieldState[,]
                             {
-                                {null,FieldState.TankField,FieldState.TankField },
-                                {FieldState.TankField,FieldState.TankField,null },
-                                {null,FieldState.TankField,FieldState.TankField }
+                                {FieldState.EmptyField,FieldState.TankField,FieldState.TankField },
+                                {FieldState.TankField,FieldState.TankField,FieldState.EmptyField },
+                                {FieldState.EmptyField,FieldState.TankField,FieldState.TankField }
                             }
                         );
 
         public Tank() : base(new ModelMap(Map))
         {
         }
+
+
     }
 }

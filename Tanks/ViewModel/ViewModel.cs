@@ -28,8 +28,6 @@ namespace Tanks
             this.BattleField = new BattleField(20, 20);
             this.MovementManager = new MotionManager(this.BattleField);
 
-            this.BattleField.SetSlot(new TankField(0,0));
-
             this.Tank = new Tank();
 
             Tank.Initialize(this.BattleField);

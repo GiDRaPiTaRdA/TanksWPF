@@ -131,16 +131,14 @@ namespace Tanks.ActionModels
             {
                 for (int j = 0; j < ModelMap.ModelPattern.GetLength(1); j++)
                 {
-                    // Ignore 
-                    if (Ignored.Any(state => ModelMap.ModelPattern[i, j] == state))
-                    {
-                        continue;
-                    }
+                    //// Ignore 
+                    //if (Ignored.Any(state => ModelMap.ModelPattern[i, j] == state))
+                    //{
+                    //    continue;
+                    //}
 
                     Type type = Type.GetType(typeof(AbstractField).Namespace + "." + ModelMap.ModelPattern[i, j].ToString());
 
-                    if (type != null)
-                    {
                         AbstractField field = (AbstractField)Activator.CreateInstance(type, new Coordinates(i + coordinates.X, j + coordinates.Y));
 
                         // Add to ModelsFields
@@ -148,7 +146,7 @@ namespace Tanks.ActionModels
 
                         // Set to BattleField
                         battleField.SetSlot(field);
-                    }
+                    
                 }
             }
         }
