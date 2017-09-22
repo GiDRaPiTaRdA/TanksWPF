@@ -97,6 +97,7 @@
     <Compile Include="ActionModels\ActionModel.cs" />
     <Compile Include="ActionModels\Dirrection.cs" />
     <Compile Include="ActionModels\ModelMap.cs" />
+    <Compile Include="ActionModels\RealModels\Tank.cs" />
     <Compile Include="Manager\Array2DManager.cs" />
     <Compile Include="Manager\CoordinatesManager.cs" />
     <Compile Include="Manager\DirrectionManager.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tanks.Models.Fields;
 using PropertyChanged;
+using System.ComponentModel;
 
 namespace Tanks.Models
 {
@@ -14,6 +15,7 @@ namespace Tanks.Models
         public FieldSlot(AbstractField field)
         {
             this.Field = field;
+           
         }
 
         public event EventHandler StateChanged;
@@ -21,6 +23,8 @@ namespace Tanks.Models
         public AbstractField Field { get; set; }
 
         public FieldState State => Field.FieldPointState;
+
+        public Coordinates Coords => Field.Coordinates;
 
         private void OnStateChanged()
         {

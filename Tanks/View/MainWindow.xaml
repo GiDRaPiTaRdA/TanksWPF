@@ -26,11 +26,16 @@
         <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="Down" />
         <KeyBinding Command="{Binding Path=MoveLeftCommand}" Key="Left" />
         <KeyBinding Command="{Binding Path=MoveRightCommand}" Key="Right" />
+
+        <KeyBinding Command="{Binding Path=DebugCommand}" Key="NumPad0" />
     </Window.InputBindings>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="{Binding Path=Tank.ModelMap.Dirrection}"></TextBlock>
+        
         <Border BorderThickness="2" BorderBrush="Black" CornerRadius="5" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center" Background="WhiteSmoke">
 
+            
             <!--BattleField-->
             <controls:BattleFieldControl
                  ControlSize ="25"

@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Tanks.Models;
+using Tanks.Models.Fields;
+using TraversalLib;
 
 namespace Tanks.ActionModels
 {
     public class ModelMap
     {
         public Dirrection Dirrection { get; private set;}
+        public FieldState?[,] ModelPattern { get; private set; }
 
-        public FieldState[,] Map { get; private set; }
+        public AbstractField[,] ModelFields { get; set; }
 
-        public ModelMap(ModelMap modelMap) : this(modelMap.Map) { }
+        public ModelMap(ModelMap modelMap) : this(modelMap.ModelPattern,modelMap.Dirrection,modelMap.ModelFields) { }
 
-        public ModelMap(FieldState[,] map)
+        public ModelMap(FieldState?[,] pattetn,Dirrection dirrection = Dirrection.Forward, AbstractField[,] map = null)
         {
-            this.Map = map;
-            this.Dirrection = Dirrection.Forward;
-        }
+            this.ModelPattern = pattetn;
+           
+            this.Dirrection = dirrection;
 
+            this.ModelFields = map ?? new AbstractField [this.ModelPattern.GetLength(0),this.ModelPattern.GetLength(1)];
+        }
     }
 }

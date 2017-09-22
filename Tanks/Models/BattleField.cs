@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Tanks.ActionModels;
 using Tanks.Models;
 using TraversalLib;
 
@@ -13,7 +14,7 @@ namespace Tanks.Models.Fields
     {
         public Coordinates Size { get; }
 
-        public FieldSlot[,] SpotsMatrix { get; set; }
+        public FieldSlot[,] SpotsMatrix { get; private set; }
 
         public BattleField(int x, int y)
         {
@@ -34,6 +35,11 @@ namespace Tanks.Models.Fields
             this[field.Coordinates].Field = field;
         }
 
+        public void SetMap(ModelMap map)
+        {
+            map.ModelFields.Traversal((o, ps) => this.SetSlot((AbstractField)o));
+        }
+
         private void CreateSlot(AbstractField field)
         {
             this[field.Coordinates] = new FieldSlot(field);
@@ -43,12 +49,26 @@ namespace Tanks.Models.Fields
         {
             get
             {
-                FieldSlot slot = this.SpotsMatrix[coordinates.X, coordinates.Y];
+                FieldSlot slot = this[coordinates.X, coordinates.Y];
                 return slot;
             }
             private set
             {
-                this.SpotsMatrix[coordinates.X, coordinates.Y] = value;
+                this[coordinates.X, coordinates.Y] = value;
+            }
+
+        }
+
+        public FieldSlot this[int x,int y]
+        {
+            get
+            {
+                FieldSlot slot = this.SpotsMatrix[x, y];
+                return slot;
+            }
+            private set
+            {
+                this.SpotsMatrix[x, y] = value;
             }
 
         }

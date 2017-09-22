@@ -65,6 +65,7 @@ namespace Tanks.Manager
 
         public bool MoveUp(ActionModel model)
         {
+
             throw new NotImplementedException();
 
             //model.ModelMap.Map.Traversal(()=>)

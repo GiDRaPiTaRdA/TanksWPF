@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tanks.Models.Fields
 {
+    [AddINotifyPropertyChangedInterface]
     public class Coordinates
     {
         public Coordinates(Coordinates coordinates) : this(coordinates.X, coordinates.Y) { }

@@ -74,7 +74,7 @@ namespace Tanks.View.Controls
         private void ControlModify(Control control)
         {
             control.Margin = new Thickness(2);
-            control.ToolTip = SpotsMatrix[GetRow(control), GetColumn(control)].Field.ToString();
+            control.ToolTip = SpotsMatrix[GetColumn(control), GetRow(control)].Field.ToString();
         }
 
         private void BindAction(FieldSlot slot, Control control)

@@ -11,7 +11,7 @@ using Tanks.Models.Dictionary;
 
 namespace Tanks.Models.Fields
 {
-   // [AddINotifyPropertyChangedInterface]
+   [AddINotifyPropertyChangedInterface]
    public abstract class AbstractField
     {
         public FieldState FieldPointState { get; }

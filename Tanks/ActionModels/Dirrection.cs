@@ -8,9 +8,9 @@ namespace Tanks.ActionModels
 {
     public enum Dirrection
     {
-        Forward,
-        Backward,
-        Left,
-        Right
+        Forward = 0,
+        Right = 1,
+        Backward = 2,
+        Left =3
     }
 }
