@@ -61,13 +61,7 @@ namespace Tanks
 
         private void Debug()
         {
-
-
-            Tank.TurnRight();
-
-            //tank.ModelMap
-
-           // tank.ModelMap.Initialize(this.BattleField);
+            new Tank().Initialize(this.BattleField);
         }
         #endregion
     }

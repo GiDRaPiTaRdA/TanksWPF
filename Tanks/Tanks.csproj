@@ -101,6 +101,7 @@
     <Compile Include="Manager\Array2DManager.cs" />
     <Compile Include="Manager\CoordinatesManager.cs" />
     <Compile Include="Manager\DirrectionManager.cs" />
+    <Compile Include="Manager\FieldRotation.cs" />
     <Compile Include="Manager\MotionManager.cs" />
     <Compile Include="Models\Coodrinates.cs" />
     <Compile Include="Models\FieldSlot.cs" />
