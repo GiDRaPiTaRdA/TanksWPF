@@ -100,11 +100,12 @@
     <Compile Include="ActionModels\RealModels\Tank.cs" />
     <Compile Include="Manager\Array2DManager.cs" />
     <Compile Include="Manager\CoordinatesManager.cs" />
-    <Compile Include="Manager\DirrectionManager.cs" />
-    <Compile Include="Manager\FieldRotation.cs" />
     <Compile Include="Manager\MotionManager.cs" />
+    <Compile Include="Manager\RotationManager.cs" />
     <Compile Include="Models\Coodrinates.cs" />
     <Compile Include="Models\FieldSlot.cs" />
+    <Compile Include="Models\Fields\FieldTypes\GrassField.cs" />
+    <Compile Include="Models\Fields\FieldTypes\NullField.cs" />
     <Compile Include="View\Controls\BattleFieldControl.cs" />
     <Compile Include="Models\BattleField.cs" />
     <Compile Include="Dictionary\DictionaryType.cs" />

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tanks.Models
+﻿namespace Tanks.Models.Fields
 {
     /// <summary>
     /// State Must be the name of target type field
@@ -12,6 +6,7 @@ namespace Tanks.Models
     public enum FieldState
     {
         EmptyField,
-        TankField
+        TankField,
+        GrassField
     }
 }

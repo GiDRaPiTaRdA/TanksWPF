@@ -8,61 +8,30 @@ using Tanks.Manager;
 using Tanks.Models;
 using Tanks.Models.Fields;
 using PropertyChanged;
+using Tanks.Models.Fields.FieldTypes;
 
 namespace Tanks.ActionModels
 {
     [AddINotifyPropertyChangedInterface]
     public abstract class ActionModel
     {
-        public ActionModel(ModelMap modelMap)
+        public ModelMap ModelMap { get; set; }
+
+        private static FieldState[] AllowedToSpawn => new[] { FieldState.EmptyField };
+
+        protected ActionModel(ModelMap modelMap)
         {
             this.ModelMap = modelMap;
         }
 
-        public ModelMap ModelMap { get; set; }
-
-        private void OnModelMapChanged()
-        {
-            this.BattleField?.SetMap(this.ModelMap);
-        }
-
-        public BattleField BattleField { get; private set; }
-
-        #region Movement
-        public void TurnFront()
-        {
-            ModelMap = ModelMap.AimMap(Dirrection.Forward);
-        }
-        public void TurnBack()
-        {
-            ModelMap = ModelMap.AimMap(Dirrection.Backward);
-        }
-        public void TurnLeft()
-        {
-            ModelMap = ModelMap.AimMap(Dirrection.Left);
-        }
-        public void TurnRight()
-        {
-            ModelMap = ModelMap.AimMap(Dirrection.Right);
-        }
-        #endregion
-
-        #region should be placed in other class
-
-        public static FieldState[] AllowedToSpawn => new FieldState[] { FieldState.EmptyField };
-        public static FieldState[] Ignored => new FieldState[] { FieldState.EmptyField };
-
+        #region Initialize & Spawn
         public void Initialize(BattleField battleField)
         {
-            this.BattleField = battleField;
-
-            //var temp = battleField.SpotsMatrix.First<FieldSlot>(o=>CheckCanSpawn(o.State,o.Field.Coordinates));
-
-            FieldSlot temp = FindOrigiSlotForInsert(battleField);
+            FieldSlot temp = this.FindOrigiSlotForInsert(battleField);
 
             if (temp != null)
             {
-                Spawn(battleField, temp.Field.Coordinates);
+                this.Spawn(battleField, temp.Field.Coordinates);
             }
             else
             {
@@ -70,12 +39,46 @@ namespace Tanks.ActionModels
             }
 
         }
+
+        private void Spawn(BattleField battleField, Coordinates coordinate)
+        {
+            for (int i = 0; i < this.ModelMap.ModelPattern.GetLength(0); i++)
+            {
+                for (int j = 0; j < this.ModelMap.ModelPattern.GetLength(1); j++)
+                {
+                    Coordinates coordinates = new Coordinates(i + coordinate.X, j + coordinate.Y);
+
+                    if (this.ModelMap.ModelPattern[i, j] != null)
+                    {
+
+                        string typeString = typeof(AbstractField).Namespace + "." + this.ModelMap.ModelPattern[i, j];
+
+                        Type type = Type.GetType(typeString);
+
+                        AbstractField field =
+                            (AbstractField)
+                                Activator.CreateInstance(type, coordinates);
+
+                        // Add to ModelsFields
+                        this.ModelMap.ModelFields[i, j] = field;
+
+                        // Set to BattleField
+                        battleField.PushField(field);
+                    }
+                    else
+                    {
+                        this.ModelMap.ModelFields[i, j] = new NullField(coordinates);
+                    }
+                }
+            }
+        }
+
         private FieldSlot FindOrigiSlotForInsert(BattleField battleField)
         {
             FieldSlot slot = null;
 
-            int RangeX = battleField.Size.X - ModelMap.ModelFields.GetLength(0) + 1;
-            int RangeY = battleField.Size.Y - ModelMap.ModelFields.GetLength(1) + 1;
+            int RangeX = battleField.Size.X - this.ModelMap.ModelFields.GetLength(0) + 1;
+            int RangeY = battleField.Size.Y - this.ModelMap.ModelFields.GetLength(1) + 1;
 
             for (int i = 0; i < RangeX; i++)
             {
@@ -83,7 +86,7 @@ namespace Tanks.ActionModels
                 {
                     var fieldSlot = battleField[i, j];
 
-                    var result = CheckCanSpawn(battleField, fieldSlot.Field.Coordinates);
+                    var result = this.CheckCanSpawn(battleField, fieldSlot.Field.Coordinates);
 
                     if (result)
                     {
@@ -104,51 +107,25 @@ namespace Tanks.ActionModels
         {
             bool result = true;
 
-            for (int i = 0; i < ModelMap.ModelPattern.GetLength(0); i++)
+            for (int i = 0; i < this.ModelMap.ModelPattern.GetLength(0); i++)
             {
-                for (int j = 0; j < ModelMap.ModelPattern.GetLength(1); j++)
+                for (int j = 0; j < this.ModelMap.ModelPattern.GetLength(1); j++)
                 {
                     Coordinates bfCoords = new Coordinates(i + coordinates.X, j + coordinates.Y);
 
 
 
                     //result &= ModelPattern[i, j] != bf[bfCoords].State;
-                    result &= AllowedToSpawn.Any(state => bf[bfCoords].State == state) || ModelMap.ModelPattern[i, j] != bf[bfCoords].State; ;
-
-
+                    result &= AllowedToSpawn.Any(state => bf[bfCoords].State == state) ; 
 
                     if (!result)
-                        return false;
+                        break;
                 }
+                if (!result)
+                    break;
             }
 
             return result;
-        }
-
-        public void Spawn(BattleField battleField, Coordinates coordinates)
-        {
-            for (int i = 0; i < ModelMap.ModelPattern.GetLength(0); i++)
-            {
-                for (int j = 0; j < ModelMap.ModelPattern.GetLength(1); j++)
-                {
-                    //// Ignore 
-                    //if (Ignored.Any(state => ModelMap.ModelPattern[i, j] == state))
-                    //{
-                    //    continue;
-                    //}
-
-                    Type type = Type.GetType(typeof(AbstractField).Namespace + "." + ModelMap.ModelPattern[i, j].ToString());
-
-                        AbstractField field = (AbstractField)Activator.CreateInstance(type, new Coordinates(i + coordinates.X, j + coordinates.Y));
-
-                        // Add to ModelsFields
-                        ModelMap.ModelFields[i, j] = field;
-
-                        // Set to BattleField
-                        battleField.SetSlot(field);
-                    
-                }
-            }
         }
         #endregion
 

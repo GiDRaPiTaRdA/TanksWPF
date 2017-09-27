@@ -1,11 +1,6 @@
 ﻿using PropertyChanged;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Tanks.Models.Fields
+namespace Tanks.Models
 {
     [AddINotifyPropertyChangedInterface]
     public class Coordinates
@@ -35,9 +30,10 @@ namespace Tanks.Models.Fields
 
         public override bool Equals(object obj)
         {
+            var coordinates = (Coordinates)obj;
             return
-                ((Coordinates)obj).X == this.X &&
-                ((Coordinates)obj).Y == this.Y;
+                coordinates != null && (coordinates.X == this.X &&
+                                             coordinates.Y == this.Y);
         }
 
         public override string ToString()

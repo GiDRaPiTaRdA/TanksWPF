@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Tanks.Models;
 using Tanks.Models.Fields;
 using Tanks.ActionModels;
+using Tanks.Models.Fields.FieldTypes;
 using TraversalLib;
 
 namespace Tanks.Manager
 {
     public class MotionManager
     {
-        public BattleField BattleField { get; set; }
+        private BattleField BattleField { get; set; }
         private CoordinatesManager CoordinatesManager { get; }
 
         public MotionManager(BattleField battleField)
@@ -21,22 +22,19 @@ namespace Tanks.Manager
             this.CoordinatesManager = new CoordinatesManager(this.BattleField.Size);
         }
 
-        public void Swap(AbstractField field1, AbstractField field2)
-        {
-            field1.Coordinates.Swap(field2.Coordinates);
-
-            this.BattleField.SetSlot(field1);
-            this.BattleField.SetSlot(field2);
-        }
-
         public bool Move(AbstractField field,Coordinates targetCoords)
         {
 
             if (targetCoords != null)
             {
-                var fieldSlot = this.BattleField[targetCoords];
+                Coordinates prevoius = new Coordinates(field.Coordinates);
+                field.Coordinates = targetCoords;
 
-                Swap(fieldSlot.Field, field);
+                if (field.FieldPointState != null)
+                {
+                    this.BattleField[prevoius].Pop();
+                    this.BattleField.PushField(field);
+                }
             }
 
             return targetCoords != null;
@@ -44,34 +42,44 @@ namespace Tanks.Manager
 
         public bool MoveUp(AbstractField field)
         {
-            var result = Move(field, CoordinatesManager.GetCoordinatesUp(field.Coordinates));
+            var result = this.Move(field, this.CoordinatesManager.GetCoordinatesUp(field.Coordinates));
             return result;
         }
         public bool MoveDown(AbstractField field)
         {
-            var result = Move(field, CoordinatesManager.GetCoordinatesDown(field.Coordinates));
+            var result = this.Move(field, this.CoordinatesManager.GetCoordinatesDown(field.Coordinates));
             return result;
         }
         public bool MoveLeft(AbstractField field)
         {
-            var result = Move(field, CoordinatesManager.GetCoordinatesLeft(field.Coordinates));
+            var result = this.Move(field, this.CoordinatesManager.GetCoordinatesLeft(field.Coordinates));
             return result;
         }
         public bool MoveRight(AbstractField field)
         {
-            var result = Move(field, CoordinatesManager.GetCoordinatesRight(field.Coordinates));
+            var result = this.Move(field, this.CoordinatesManager.GetCoordinatesRight(field.Coordinates));
             return result;
         }
 
         public bool MoveUp(ActionModel model)
         {
-
-            throw new NotImplementedException();
-
-            //model.ModelMap.Map.Traversal(()=>)
-
-            //var result = Move(field, CoordinatesManager.GetCoordinatesUp(field.Coordinates));
-            //return result;
+            model.ModelMap.ModelFields.ForEach<AbstractField>(f=> this.MoveUp(f));
+            return true;
+        }
+        public bool MoveDown(ActionModel model)
+        {
+            model.ModelMap.ModelFields.ForEach<AbstractField>(f => this.MoveDown(f));
+            return true;
+        }
+        public bool MoveLeft(ActionModel model)
+        {
+            model.ModelMap.ModelFields.ForEach<AbstractField>(f => this.MoveLeft(f));
+            return true;
+        }
+        public bool MoveRight(ActionModel model)
+        {
+            model.ModelMap.ModelFields.ForEach<AbstractField>(f => this.MoveRight(f));
+            return true;
         }
 
     }

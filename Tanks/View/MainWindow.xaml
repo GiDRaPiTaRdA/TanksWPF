@@ -1,4 +1,4 @@
-﻿<Window x:Class="Tanks.MainWindow"
+﻿<Window x:Class="Tanks.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,10 +17,10 @@
     </Window.Resources>
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding Path=MoveUpCommand}" Key="W" />
-        <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="S" />
-        <KeyBinding Command="{Binding Path=MoveLeftCommand}" Key="A" />
-        <KeyBinding Command="{Binding Path=MoveRightCommand}" Key="D" />
+        <KeyBinding Command="{Binding Path=MoveUpCommandQ}" Key="W" />
+        <KeyBinding Command="{Binding Path=MoveDownCommandQ}" Key="S" />
+        <KeyBinding Command="{Binding Path=MoveLeftCommandQ}" Key="A" />
+        <KeyBinding Command="{Binding Path=MoveRightCommandQ}" Key="D" />
 
         <KeyBinding Command="{Binding Path=MoveUpCommand}" Key="Up" />
         <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="Down" />

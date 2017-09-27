@@ -6,29 +6,53 @@ using System.Threading.Tasks;
 using Tanks.Models.Fields;
 using PropertyChanged;
 using System.ComponentModel;
+using Tanks.Models.Fields.FieldTypes;
 
 namespace Tanks.Models
 {
     [AddINotifyPropertyChangedInterface]
     public class FieldSlot 
     {
-        public FieldSlot(AbstractField field)
-        {
-            this.Field = field;
-           
-        }
-
         public event EventHandler StateChanged;
 
-        public AbstractField Field { get; set; }
-
-        public FieldState State => Field.FieldPointState;
-
-        public Coordinates Coords => Field.Coordinates;
-
-        private void OnStateChanged()
+        public FieldSlot(AbstractField field)
         {
-            StateChanged?.Invoke(this,new SlotEventArgs(Field));
+            this.Fields =  new Stack<AbstractField>();
+            this.Push(field);
+        }
+
+        public Stack<AbstractField> Fields { get; }
+
+        public AbstractField Field => this.Fields.Peek();
+
+        public FieldState? State => this.Field.FieldPointState;
+
+
+        public void Push(AbstractField field)
+        {
+            if (field.FieldPointState != null)
+            {
+                this.Fields.Push(field);
+                this.OnFieldChanged();
+            }
+        }
+
+        public AbstractField Pop()
+        {
+            AbstractField field = this.Fields.Pop();
+            this.OnFieldChanged();
+            return field;
+        }
+
+
+        private void OnFieldChanged()
+        {
+            this.StateChanged?.Invoke(this,new SlotEventArgs(this.Field));
+        }
+
+        public override string ToString()
+        {
+            return "["+nameof(FieldSlot)+"]" + this.Field;
         }
     }
 

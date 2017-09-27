@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tanks.Models;
+using Tanks.Models.Fields;
 
 namespace Tanks.ActionModels.RealModels
 {
@@ -16,14 +17,14 @@ namespace Tanks.ActionModels.RealModels
         /// X X _
         /// _ X X
         /// </summary>
-        private static FieldState[,] Map =>
-                (new FieldState[,]
+        private static FieldState?[,] Map =>
+                new FieldState?[,]
                             {
-                                {FieldState.EmptyField,FieldState.TankField,FieldState.TankField },
-                                {FieldState.TankField,FieldState.TankField,FieldState.EmptyField },
-                                {FieldState.EmptyField,FieldState.TankField,FieldState.TankField }
+                                {null,FieldState.TankField,FieldState.TankField },
+                                {FieldState.TankField,FieldState.TankField,null },
+                                {null,FieldState.TankField,FieldState.TankField }
                             }
-                        );
+                        ;            
 
         public Tank() : base(new ModelMap(Map))
         {

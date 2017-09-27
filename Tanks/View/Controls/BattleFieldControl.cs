@@ -12,9 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tanks.Dictionary;
 using Tanks.Models;
-using Tanks.Models.Dictionary;
-using Tanks.UserInterface;
+using Tanks.Models.Fields;
+using Tanks.View.UserInterface;
 using TraversalLib;
 
 namespace Tanks.View.Controls
@@ -35,64 +36,68 @@ namespace Tanks.View.Controls
         }
 
         public BattleFieldControl()
-        { 
-            Loaded += BattleFieldControl_Loaded;
+        {
+            this.Loaded += this.BattleFieldControl_Loaded;
         }
         #endregion
 
         private void BattleFieldControl_Loaded(object sender, RoutedEventArgs e)
         {
             // Create control matrix
-            ControlsMatrix = new UIManager(this.ControlSize).CreateMatrix<Label>(this.SizeX, this.SizeY, this);
+            this.ControlsMatrix = new UiManager(this.ControlSize).CreateMatrix<Label>(this.SizeX, this.SizeY, this);
 
             // Initialize UI & Bind 
-            Initialize();
+            this.Initialize();
 
             // Modify controls
-            UIManager.ModifyMatrix(this.ControlsMatrix, this.ControlModify);
+            UiManager.ModifyMatrix(this.ControlsMatrix, this.ControlModify);
         }
 
         private void Initialize()
         {
             //Initialize color
             TREXCM.RecursiveTraversal(
-                (os, parms) =>
-                PaintControl((Control)os[1], (FieldSlot)os[0]),
-                SpotsMatrix,
-                ControlsMatrix
+                (os, parms) => this.PaintControl((Control)os[1], (FieldSlot)os[0]), this.SpotsMatrix, this.ControlsMatrix
                 );
 
             //Bind
             TREXCM.RecursiveTraversal(
-                (os, parms) =>
-                BindAction((FieldSlot)os[0], (Control)os[1]),
-                SpotsMatrix,
-                ControlsMatrix
+                (os, parms) => this.BindAction((FieldSlot)os[0], (Control)os[1]), this.SpotsMatrix, this.ControlsMatrix
                 );
         }
 
         private void ControlModify(Control control)
         {
             control.Margin = new Thickness(2);
-            control.ToolTip = SpotsMatrix[GetColumn(control), GetRow(control)].Field.ToString();
+            control.ToolTip = this.SpotsMatrix[GetColumn(control), GetRow(control)].Field.ToString();
         }
 
         private void BindAction(FieldSlot slot, Control control)
         {
-            slot.StateChanged += (o, s) => PaintControl(control, slot);
+            slot.StateChanged += (o, s) => this.PaintControl(control, slot);
         }
 
         private void PaintControl(Control control, FieldSlot slot)
         {
-            control.Background = new SolidColorBrush((Color)ResourcesDictionary.GetDictionaryElement((slot.Field).FieldPointState, DictionaryType.Color));
+            var state = (slot.Field).FieldPointState;
+            if (state != null)
+            {
+                control.Background =
+                    new SolidColorBrush(
+                        (Color) ResourcesDictionary.GetDictionaryElement(state.Value, DictionaryType.Color));
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(state) +" must not be null in battle field");
+            }
         }
     
         #endregion
 
         #region Properties
-        public int SizeX => SpotsMatrix.GetLength(0);
+        public int SizeX => this.SpotsMatrix.GetLength(0);
 
-        public int SizeY => SpotsMatrix.GetLength(1);
+        public int SizeY => this.SpotsMatrix.GetLength(1);
 
         public int ControlSize { get; set; }
 
@@ -100,8 +105,8 @@ namespace Tanks.View.Controls
 
         public FieldSlot[,] SpotsMatrix
         {
-            get { return (FieldSlot[,])GetValue(SpotsMatrixProperty); }
-            set { SetValue(SpotsMatrixProperty, value); }
+            get { return (FieldSlot[,]) this.GetValue(SpotsMatrixProperty); }
+            set { this.SetValue(SpotsMatrixProperty, value); }
         }
         #endregion
     }

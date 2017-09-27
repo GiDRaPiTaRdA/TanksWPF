@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Collections.Generic;
 using Tanks.ActionModels;
-using Tanks.Models;
+using Tanks.Models.Fields;
+using Tanks.Models.Fields.FieldTypes;
 using TraversalLib;
 
-namespace Tanks.Models.Fields
+namespace Tanks.Models
 {
     public class BattleField
     {
@@ -16,35 +12,60 @@ namespace Tanks.Models.Fields
 
         public FieldSlot[,] SpotsMatrix { get; private set; }
 
+        public Dictionary<int, ActionModel> Models { get; private set; }
+
         public BattleField(int x, int y)
         {
-            this.Size = new Coordinates(x,y);
+            this.Size = new Coordinates(x, y);
 
-            Initialize();
+            this.Initialize();
         }
 
         private void Initialize()
         {
-            SpotsMatrix = new FieldSlot[Size.X, Size.Y];
+            this.Models = new Dictionary<int, ActionModel>();
 
-            SpotsMatrix.Traversal((o, ps) => CreateSlot(new EmptyField(ps[0], ps[1])));
+            this.SpotsMatrix = new FieldSlot[this.Size.X, this.Size.Y];
+
+            this.SpotsMatrix.Traversal((o, ps) => this[ps[0], ps[1]] = new FieldSlot(new EmptyField(ps[0], ps[1])));
         }
 
-        public void SetSlot(AbstractField field)
+        #region Field operations
+        public void PushField(AbstractField field)
         {
-            this[field.Coordinates].Field = field;
+            if (field.FieldPointState!=null)
+            {
+                this[field.Coordinates].Push(field);
+            }
+        }
+        public void PopField(AbstractField field)
+        {
+            if (field.FieldPointState != null)
+            {
+                this[field.Coordinates].Pop();
+            }
         }
 
         public void SetMap(ModelMap map)
         {
-            map.ModelFields.Traversal((o, ps) => this.SetSlot((AbstractField)o));
+            map.ModelFields.Traversal((o, ps) => this.PushField((AbstractField)o));
         }
+        #endregion
 
-        private void CreateSlot(AbstractField field)
+        #region Model operations
+        public void PushModel(ActionModel model)
         {
-            this[field.Coordinates] = new FieldSlot(field);
+            this.Models.Add(model.GetHashCode(), model);
+            model.ModelMap.ModelFields.ForEach<AbstractField>(this.PushField);
         }
+        public void PopModel(ActionModel model)
+        {
+            this.Models.Remove(model.GetHashCode());
+            model.ModelMap.ModelFields.ForEach<AbstractField>(this.PopField);
+        }
+        #endregion
 
+        #region Indexators
         public FieldSlot this[Coordinates coordinates]
         {
             get
@@ -59,7 +80,7 @@ namespace Tanks.Models.Fields
 
         }
 
-        public FieldSlot this[int x,int y]
+        public FieldSlot this[int x, int y]
         {
             get
             {
@@ -72,5 +93,6 @@ namespace Tanks.Models.Fields
             }
 
         }
+        #endregion
     }
 }

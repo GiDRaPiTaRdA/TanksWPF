@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
+using Tanks.Models;
+using Tanks.Models.Fields;
 
-namespace Tanks.Models.Dictionary
+namespace Tanks.Dictionary
 {
     static class ResourcesDictionary
     {
-        [ResourceType(FieldState.EmptyField,DictionaryType.Color)] public static Color FPColorEmpty => Colors.White;
-        [ResourceType(FieldState.TankField, DictionaryType.Color)] public static Color FPColorTank => Colors.Black;
+        [ResourceType(FieldState.EmptyField,DictionaryType.Color)] public static Color FpColorEmpty => Colors.White;
+        [ResourceType(FieldState.TankField, DictionaryType.Color)] public static Color FpColorTank => Colors.Black;
+        [ResourceType(FieldState.GrassField, DictionaryType.Color)]public static Color FpColorGrass => Colors.GreenYellow;
 
         public static object GetDictionaryElement(FieldState state,DictionaryType key)
         {
@@ -24,7 +24,7 @@ namespace Tanks.Models.Dictionary
             if (propsInfo.Count() > 1)
                 throw new Exception("Dictionary has same attribute key properies");
 
-            if (propsInfo.Count() == 0)
+            if (!propsInfo.Any())
                 throw new Exception("Dictionary has no such attribute key properies");
 
             var result = propsInfo.First().GetValue(null);

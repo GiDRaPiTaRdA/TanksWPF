@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Tanks.Models;
 using Tanks.Models.Fields;
+using Tanks.Models.Fields.FieldTypes;
 using TraversalLib;
 
 namespace Tanks.ActionModels
@@ -13,13 +14,13 @@ namespace Tanks.ActionModels
     public class ModelMap
     {
         public Dirrection Dirrection { get; private set;}
-        public FieldState[,] ModelPattern { get; private set; }
+        public FieldState?[,] ModelPattern { get; private set; }
 
-        public AbstractField[,] ModelFields { get; set; }
+        public AbstractField[,] ModelFields { get; }
 
         public ModelMap(ModelMap modelMap) : this(modelMap.ModelPattern,modelMap.Dirrection,modelMap.ModelFields) { }
 
-        public ModelMap(FieldState[,] pattetn,Dirrection dirrection = Dirrection.Forward, AbstractField[,] map = null)
+        public ModelMap(FieldState?[,] pattetn,Dirrection dirrection = Dirrection.Forward, AbstractField[,] map = null)
         {
             this.ModelPattern = pattetn;
            

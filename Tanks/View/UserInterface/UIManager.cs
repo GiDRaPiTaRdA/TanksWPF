@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Tanks.Models.Fields;
 
-namespace Tanks.UserInterface
+namespace Tanks.View.UserInterface
 {
-    class UIManager
+    class UiManager
     {
-        public int ControlSize { get; set; }
+        public int ControlSize { get; }
 
-        public UIManager(int controlSize = 25)
+        public UiManager(int controlSize = 25)
         {
             this.ControlSize = controlSize;
         }
@@ -24,16 +20,14 @@ namespace Tanks.UserInterface
             // Add columns X
             for (int i = 0; i < x; i++)
             {
-                ColumnDefinition columnDef = new ColumnDefinition();
-                columnDef.Width = new GridLength(ControlSize);
+                ColumnDefinition columnDef = new ColumnDefinition {Width = new GridLength(this.ControlSize)};
                 parrent.ColumnDefinitions.Add(columnDef);
             }
 
             // Add rows Y
             for (int i = 0; i < y; i++)
             {
-                RowDefinition rowDef = new RowDefinition();
-                rowDef.Height = new GridLength(ControlSize);
+                RowDefinition rowDef = new RowDefinition {Height = new GridLength(this.ControlSize)};
                 parrent.RowDefinitions.Add(rowDef);
             }
 
