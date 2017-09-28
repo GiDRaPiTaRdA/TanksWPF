@@ -31,6 +31,7 @@ namespace Tanks.ViewModel
             this.MovementManager = new MotionManager(this.BattleField);
             this.RotationManager =  new RotationManager(this.BattleField);
 
+            this.TankField = new TankField(5,5);
 
             // Logic
             this.Tank = new Tank();
@@ -41,6 +42,8 @@ namespace Tanks.ViewModel
 
             this.BattleField.PushField(new GrassField(5,5));
             this.BattleField.PushField(new GrassField(0, 0));
+
+            this.BattleField.PushField(this.TankField);
         }
 
         #region Delegate commands
@@ -61,10 +64,15 @@ namespace Tanks.ViewModel
         private DelegateCommand moveDownCommandQ;
         private DelegateCommand moveLeftCommandQ;
 
-        public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.GoUp(this.Tank2)));
-        public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.GoDown(this.Tank2)));
-        public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.GoLeft(this.Tank2)));
-        public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.GoRight(this.Tank2)));
+        public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.MovementManager.MoveUp(this.TankField)));
+        public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.MovementManager.MoveDown(this.TankField)));
+        public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.MovementManager.MoveLeft(this.TankField)));
+        public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.MovementManager.MoveRight(this.TankField)));
+
+        //public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.GoUp(this.Tank2)));
+        //public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.GoDown(this.Tank2)));
+        //public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.GoLeft(this.Tank2)));
+        //public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.GoRight(this.Tank2)));
         #endregion Delegate commands
 
 
