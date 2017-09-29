@@ -69,7 +69,6 @@ namespace Tanks.View.Controls
         private void ControlModify(Control control)
         {
             control.Margin = new Thickness(2);
-            control.ToolTip = this.SpotsMatrix[GetColumn(control), GetRow(control)].Field.ToString();
         }
 
         private void BindAction(FieldSlot slot, Control control)
@@ -85,6 +84,7 @@ namespace Tanks.View.Controls
                 control.Background =
                     new SolidColorBrush(
                         (Color) ResourcesDictionary.GetDictionaryElement(state.Value, DictionaryType.Color));
+                control.ToolTip = this.SpotsMatrix[GetColumn(control), GetRow(control)].Field.ToString();
             }
             else
             {

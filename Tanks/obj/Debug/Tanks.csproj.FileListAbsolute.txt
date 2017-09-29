@@ -1,15 +1,3 @@
-c:\users\maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks.exe.config
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks.exe
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Tanks.pdb
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.csprojResolveAssemblyReference.cache
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\App.g.cs
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks_MarkupCompile.cache
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks_MarkupCompile.lref
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.g.resources
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.Properties.Resources.resources
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.exe
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Tanks.pdb
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\bin\Debug\Tanks.exe.config
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.exe
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.pdb
@@ -24,33 +12,3 @@ C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\MainWindow.baml
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.g.resources
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.Properties.Resources.resources
 C:\Users\Maksim\Source\Repos\TanksWPF\Tanks\obj\Debug\Tanks.csproj.GenerateResource.Cache
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\MainWindow.g.cs
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\View\MainWindow.baml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\obj\Debug\Themes\Generic.baml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\TraversalLib.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\TraversalLib.pdb
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Composition.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Interactivity.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Mvvm.Desktop.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Mvvm.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.PubSubEvents.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\System.Windows.Interactivity.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Composition.xml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Interactivity.xml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.Mvvm.xml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.xml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\Microsoft.Practices.ServiceLocation.xml
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\de\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\en\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\es\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\it\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\ru\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-C:\Users\Maxim\documents\visual studio 2015\Projects\Tanks\Tanks\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
