@@ -20,9 +20,9 @@ namespace Tanks.ActionModels.RealModels
         private static FieldState?[,] Map =>
                 new FieldState?[,]
                             {
-                                {null,FieldState.TankField,FieldState.TankField },
-                                {FieldState.TankField,FieldState.TankField,null },
-                                {null,FieldState.TankField,FieldState.TankField }
+                                {null,FieldState.Tank,FieldState.Tank },
+                                {FieldState.Tank,FieldState.Tank,null },
+                                {null,FieldState.Tank,FieldState.Tank }
                             }
                         ;            
 

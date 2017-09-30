@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Tanks.Manager;
 using Tanks.Models;
 using Tanks.Models.Fields;
@@ -23,6 +23,7 @@ namespace Tanks.ActionModels
         {
             this.ModelMap = modelMap;
         }
+
 
         #region Initialize & Spawn
         public void Initialize(BattleField battleField)
@@ -50,14 +51,7 @@ namespace Tanks.ActionModels
 
                     if (this.ModelMap.ModelPattern[i, j] != null)
                     {
-
-                        string typeString = typeof(AbstractField).Namespace + "." + this.ModelMap.ModelPattern[i, j];
-
-                        Type type = Type.GetType(typeString);
-
-                        AbstractField field =
-                            (AbstractField)
-                                Activator.CreateInstance(type, coordinates);
+                        AbstractField field = this.ModelMap.ModelPattern[i, j].GenerateInstance(coordinates);
 
                         // Add to ModelsFields
                         this.ModelMap.ModelFields[i, j] = field;
@@ -113,9 +107,6 @@ namespace Tanks.ActionModels
                 {
                     Coordinates bfCoords = new Coordinates(i + coordinates.X, j + coordinates.Y);
 
-
-
-                    //result &= ModelPattern[i, j] != bf[bfCoords].State;
                     result &= AllowedToSpawn.Any(state => bf[bfCoords].State == state) ; 
 
                     if (!result)

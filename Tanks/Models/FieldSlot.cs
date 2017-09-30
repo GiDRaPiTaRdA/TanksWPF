@@ -17,13 +17,13 @@ namespace Tanks.Models
 
         public FieldSlot(AbstractField field)
         {
-            this.Fields =  new Stack<AbstractField>();
+            this.Fields =  new List<AbstractField>();
             this.Push(field);
         }
 
-        public Stack<AbstractField> Fields { get; }
+        public List<AbstractField> Fields { get; }
 
-        public AbstractField Field => this.Fields.Peek();
+        public AbstractField Field => this.Fields.Last();
 
         public FieldState? State => this.Field.FieldPointState;
 
@@ -32,16 +32,16 @@ namespace Tanks.Models
         {
             if (field.FieldPointState != null)
             {
-                this.Fields.Push(field);
+                this.Fields.Add(field);
                 this.OnFieldChanged();
             }
         }
 
-        public AbstractField Pop()
+        public bool Pop(AbstractField field)
         {
-            AbstractField field = this.Fields.Pop();
+            bool result = this.Fields.Remove(field);
             this.OnFieldChanged();
-            return field;
+            return result;
         }
 
 

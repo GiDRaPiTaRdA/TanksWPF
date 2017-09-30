@@ -6,7 +6,10 @@
     public enum FieldState
     {
         EmptyField,
-        TankField,
-        GrassField
+        Tank,
+        TankEnemy,
+        Grass,
+        CannonBall,
+        Wall
     }
 }

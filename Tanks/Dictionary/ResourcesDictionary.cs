@@ -10,8 +10,11 @@ namespace Tanks.Dictionary
     static class ResourcesDictionary
     {
         [ResourceType(FieldState.EmptyField,DictionaryType.Color)] public static Color FpColorEmpty => Colors.White;
-        [ResourceType(FieldState.TankField, DictionaryType.Color)] public static Color FpColorTank => Colors.Black;
-        [ResourceType(FieldState.GrassField, DictionaryType.Color)]public static Color FpColorGrass => Colors.GreenYellow;
+        [ResourceType(FieldState.Tank, DictionaryType.Color)] public static Color FpColorTank => Colors.Black;
+        [ResourceType(FieldState.TankEnemy, DictionaryType.Color)]public static Color FpColorTankEnemy => Colors.Orange;
+        [ResourceType(FieldState.Grass, DictionaryType.Color)]public static Color FpColorGrass => Colors.GreenYellow;
+        [ResourceType(FieldState.CannonBall, DictionaryType.Color)]public static Color FpColorCannonBall => Colors.Red;
+        [ResourceType(FieldState.Wall, DictionaryType.Color)] public static Color FpColorWall => Colors.DimGray;
 
         public static object GetDictionaryElement(FieldState state,DictionaryType key)
         {

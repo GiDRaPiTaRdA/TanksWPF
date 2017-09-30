@@ -1,8 +1,10 @@
-﻿namespace Tanks.Models.Fields.FieldTypes
+﻿using Tanks.Models.Fields.Interfaces;
+
+namespace Tanks.Models.Fields.FieldTypes
 {
-    class TankField : AbstractField
+    class TankField : AbstractField ,ISolid
     {
         public TankField(int x, int y) : this(new Coordinates(x,y)){}
-        public TankField(Coordinates coordinate) : base(coordinate, FieldState.TankField){}
+        public TankField(Coordinates coordinate) : base(coordinate, FieldState.Tank){}
     }
 }

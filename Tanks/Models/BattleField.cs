@@ -42,7 +42,7 @@ namespace Tanks.Models
         {
             if (field.FieldPointState != null)
             {
-                this[field.Coordinates].Pop();
+                this[field.Coordinates].Pop(field);
             }
         }
 

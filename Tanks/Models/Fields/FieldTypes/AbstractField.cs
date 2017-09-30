@@ -15,6 +15,8 @@ namespace Tanks.Models.Fields.FieldTypes
             this.FieldPointState = state;
         }
 
+       public virtual void Intercept(AbstractField field){}
+
         public override string ToString()
         {
             return this.Coordinates +" Field state: " + ((object)this.FieldPointState??"Null");

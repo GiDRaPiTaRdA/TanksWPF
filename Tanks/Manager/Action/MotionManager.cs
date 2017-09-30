@@ -7,6 +7,7 @@ using Tanks.Models;
 using Tanks.Models.Fields;
 using Tanks.ActionModels;
 using Tanks.Models.Fields.FieldTypes;
+using Tanks.Models.Fields.Interfaces;
 using TraversalLib;
 
 namespace Tanks.Manager
@@ -27,8 +28,8 @@ namespace Tanks.Manager
         {
             bool result =
                 field?.Coordinates != null &&
-                targetCoords != null&&
-                this.BattleField[targetCoords].State != FieldState.TankField;
+                targetCoords != null &&
+                !(this.BattleField[targetCoords].Field is ISolid);
 
             return result;
         }
@@ -69,7 +70,7 @@ namespace Tanks.Manager
 
                 if (field.FieldPointState != null)
                 {
-                    this.BattleField[prevoius].Pop();
+                    this.BattleField[prevoius].Pop(field);
                     this.BattleField.PushField(field);
                 }
             }
@@ -108,7 +109,7 @@ namespace Tanks.Manager
                 field?.Coordinates != null &&
                 targetCoords != null &&
                 (model.ModelMap.ModelFields.Where<AbstractField>(f1 => f1.FieldPointState != null).Any(f => f.Coordinates.Equals(this.BattleField[targetCoords].Field.Coordinates)) ||
-                this.BattleField[targetCoords].Field.FieldPointState != FieldState.TankField || field.FieldPointState == null);
+                !(this.BattleField[targetCoords].Field is ISolid) || field.FieldPointState == null);
 
             return result;
         }
