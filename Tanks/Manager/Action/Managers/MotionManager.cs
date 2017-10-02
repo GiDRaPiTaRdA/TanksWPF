@@ -6,16 +6,14 @@ using Tanks.Models.Units.Interfaces;
 using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
-namespace Tanks.Manager.Action
+namespace Tanks.Manager.Action.Managers
 {
-    public class MotionManager
+    public class MotionManager :AbstractManagerBase
     {
-        public BattleField BattleField { get; set; }
         private CoordinatesManager CoordinatesManager { get; }
 
-        public MotionManager(BattleField battleField)
+        public MotionManager(BattleField battleField) : base(battleField) 
         {
-            this.BattleField = battleField;
             this.CoordinatesManager = new CoordinatesManager(this.BattleField.Size);
         }
 
@@ -25,7 +23,7 @@ namespace Tanks.Manager.Action
             bool result =
                 ActionManager.CanAct(unit, this.BattleField) &&
                   targetCoords != null &&
-                !this.BattleField[targetCoords].Fields.Any(f => f is ISolid);
+                !this.BattleField[targetCoords].Units.Any(f => f is ISolid);
 
 
             return result;
@@ -99,7 +97,7 @@ namespace Tanks.Manager.Action
                 ActionManager.CanAct(unit,this.BattleField)&&
                 targetCoords!=null&&
                 (model.ModelMap.ModelUnits.Where<AbstractUnit>(f1 => f1.UnitPointState != null).Any(f => f.Coordinates.Equals(this.BattleField[targetCoords].Unit.Coordinates)) ||
-                !(this.BattleField[targetCoords].Fields.Any(f => f is ISolid)) || unit.UnitPointState == null);
+                !(this.BattleField[targetCoords].Units.Any(f => f is ISolid)) || unit.UnitPointState == null);
 
             return result;
         }

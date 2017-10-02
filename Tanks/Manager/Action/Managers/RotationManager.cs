@@ -4,16 +4,11 @@ using Tanks.Models;
 using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
-namespace Tanks.Manager.Action
+namespace Tanks.Manager.Action.Managers
 {
-    public class RotationManager
+    public class RotationManager :AbstractManagerBase
     {
-        private BattleField BattleField { get; set; }
-
-        public RotationManager(BattleField battleField)
-        {
-            this.BattleField = battleField;
-        }
+        public RotationManager(BattleField battleField) : base(battleField) { }
 
 
         private void RotateModel(ActionModel model, Dirrection dirrection)

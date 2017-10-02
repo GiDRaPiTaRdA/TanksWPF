@@ -21,7 +21,7 @@ namespace Tanks.View.Controls
 {
     public class BattleFieldControl : Grid
     {
-        #region Fields
+        #region Units
         public static readonly DependencyProperty SpotsMatrixProperty =
          DependencyProperty.Register(nameof(SpotsMatrix), typeof(UnitSlot[,]), typeof(BattleFieldControl), new UIPropertyMetadata(null));
         #endregion

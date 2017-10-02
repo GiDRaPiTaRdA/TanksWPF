@@ -4,16 +4,12 @@ using Tanks.Models;
 using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
-namespace Tanks.Manager.Action
+namespace Tanks.Manager.Action.Managers
 {
-    public class DestructionManager
+    public class DestructionManager :AbstractManagerBase
     {
-        private BattleField BattleField { get; set; }
+        public DestructionManager(BattleField battleField) : base(battleField) { }
 
-        public DestructionManager(BattleField battleField)
-        {
-            this.BattleField = battleField;
-        }
 
         public void WhatToDestroy(AbstractUnit unit)
         {

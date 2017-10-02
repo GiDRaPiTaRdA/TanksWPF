@@ -1,4 +1,5 @@
 ﻿using Tanks.ActionModels;
+using Tanks.Manager.Action.Managers;
 using Tanks.Models;
 using Tanks.Models.Units.Interfaces;
 using Tanks.Models.Units.UnitModels;
@@ -14,11 +15,14 @@ namespace Tanks.Manager.Action
 
         private FigthManager FightManager { get; set; }
 
+        private SpawnManager SpawnManager { get; set; }
+
         public ActionManager(BattleField battleField)
         {
             this.MovementManager = new MotionManager(battleField);
             this.RotationManager = new RotationManager(battleField);
             this.FightManager =  new FigthManager(battleField);
+            this.SpawnManager = new SpawnManager(battleField);
         }
 
 
@@ -27,7 +31,7 @@ namespace Tanks.Manager.Action
             bool canMove =
                unit?.Coordinates != null &&
               
-               ((battleField[unit.Coordinates].Fields.Contains(unit) && unit is ISolid) ^
+               ((battleField[unit.Coordinates].Units.Contains(unit) && unit is ISolid) ^
                unit.UnitPointState == null);
             return canMove;
         }
@@ -41,7 +45,13 @@ namespace Tanks.Manager.Action
             return result;
         }
 
-        #region Action model action
+        #region Action model actions
+
+        public void Spawn(ActionModel model)
+        {
+            this.SpawnManager.Initialize(model);
+        }
+
         public void GoUp(ActionModel model)
         {
             if (model.ModelMap.Dirrection != Dirrection.Forward)
@@ -94,9 +104,10 @@ namespace Tanks.Manager.Action
         {
             this.FightManager.Fire(model);
         }
+
         #endregion
 
-        #region unit actions
+        #region Unit actions
         public void GoUp(AbstractUnit model)
         {
             this.MovementManager.MoveUp(model);

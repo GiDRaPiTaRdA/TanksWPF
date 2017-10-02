@@ -17,13 +17,13 @@ namespace Tanks.Models
 
         public UnitSlot(AbstractUnit unit)
         {
-            this.Fields =  new List<AbstractUnit>();
+            this.Units =  new List<AbstractUnit>();
             this.Push(unit);
         }
 
-        public List<AbstractUnit> Fields { get; }
+        public List<AbstractUnit> Units { get; }
 
-        public AbstractUnit Unit =>  this.Fields.Last();
+        public AbstractUnit Unit =>  this.Units.Last();
 
         public UnitState? State => this.Unit.UnitPointState;
 
@@ -32,14 +32,14 @@ namespace Tanks.Models
         {
             if (unit.UnitPointState != null)
             {
-                this.Fields.Add(unit);
+                this.Units.Add(unit);
                 this.OnFieldChanged();
             }
         }
 
         public bool Pop(AbstractUnit unit)
         {
-            bool result = this.Fields.Remove(unit);
+            bool result = this.Units.Remove(unit);
             this.OnFieldChanged();
             return result;
         }

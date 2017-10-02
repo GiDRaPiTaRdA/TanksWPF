@@ -5,8 +5,10 @@ using Tanks.ActionModels;
 using Tanks.ActionModels.RealModels;
 using Tanks.Manager;
 using Tanks.Manager.Action;
+using Tanks.Manager.Action.Managers;
 using Tanks.Models;
 using Tanks.Models.Units.UnitModels;
+using Tanks.Models.Units.UnitModels.Cannons;
 using TraversalLib;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -35,8 +37,13 @@ namespace Tanks.ViewModel
             this.Tank2 = new TankEnemy();
             this.Tank1 = new TankUnit(5, 6);
 
-            this.Tank.Initialize(this.BattleField);
-            this.Tank2.Initialize(this.BattleField);
+            this.ActionManager.Spawn(this.Tank);
+            this.ActionManager.Spawn(this.Tank2);
+
+            WeaponManager weaponManager = new WeaponManager(this.BattleField);
+
+            weaponManager.ChangeWeapon<BrickCannon>(this.Tank);
+
 
             this.BattleField.PushField(this.Tank1);
 
@@ -87,12 +94,9 @@ namespace Tanks.ViewModel
 
         private void Debug()
         {
-            //DestructionManager destructionManager = new DestructionManager(this.BattleField);
-
-            //destructionManager.WhatToDestroy(this.Tank.ModelMap.ModelUnits.First<AbstractUnit>());
-
-            //destructionManager.WhatToDestroy(this.BattleField[7,7].unit);
             this.ActionManager.Fire(this.Tank);
+
+            
         }
         #endregion
     }

@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Timers;
-using System.Windows.Annotations;
 using Tanks.ActionModels;
 using Tanks.Models;
-using Tanks.Models.Units;
 using Tanks.Models.Units.Interfaces;
 using Tanks.Models.Units.UnitModels;
 using Tanks.Models.Units.UnitModels.BasicUnits;
 using TraversalLib;
 
-namespace Tanks.Manager.Action
+namespace Tanks.Manager.Action.Managers
 {
-    public class FigthManager
+    public class FigthManager:AbstractManagerBase
     {
-        private BattleField BattleField { get; set; }
-
         private DestructionManager DestructionManager { get; }
         private MotionManager MotionManager { get; }
         private CoordinatesManager CoordinatesManager { get; }
 
-        public FigthManager(BattleField battleField)
+        public FigthManager(BattleField battleField) : base(battleField) 
         {
-            this.BattleField = battleField;
             this.MotionManager = new MotionManager(this.BattleField);
             this.DestructionManager = new DestructionManager(this.BattleField);
             this.CoordinatesManager = new CoordinatesManager(this.BattleField.Size);
@@ -47,6 +42,7 @@ namespace Tanks.Manager.Action
                             (m, motionDirrection, stopAction) => m.Interact(
                                 this.MotionManager,
                                 this.DestructionManager,
+                                this.BattleField,
                                 model.ModelMap.Dirrection,
                                 motionDirrection,
                                 stopAction

@@ -2,7 +2,7 @@
 using Tanks.ActionModels;
 using Tanks.Models;
 
-namespace Tanks.Manager.Action
+namespace Tanks.Manager.Action.Managers
 {
     class CoordinatesManager
     {
