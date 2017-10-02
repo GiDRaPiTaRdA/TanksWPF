@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Tanks.ActionModels;
 using Tanks.Models;
-using Tanks.Models.Fields;
 
-namespace Tanks.Manager
+namespace Tanks.Manager.Action
 {
     class CoordinatesManager
     {
@@ -16,6 +11,30 @@ namespace Tanks.Manager
         public CoordinatesManager(Coordinates coordinates)
         {
             this.BoundCoordinates = coordinates;
+        }
+
+        public Coordinates GetCoordinates(Coordinates coordinates, Dirrection dirrection)
+        {
+            Coordinates coords;
+
+            switch (dirrection)
+            {
+                case Dirrection.Forward:
+                    coords = this.GetCoordinatesUp(coordinates);
+                    break;
+                case Dirrection.Backward:
+                    coords = this.GetCoordinatesDown(coordinates);
+                    break;
+                case Dirrection.Left:
+                    coords = this.GetCoordinatesLeft(coordinates);
+                    break;
+                case Dirrection.Right:
+                    coords = this.GetCoordinatesRight(coordinates);
+                    break;
+                default:
+                    throw new ArgumentException("Dirrcetion :" +dirrection+" is not implemented");
+            }
+            return coords;
         }
 
         public Coordinates GetCoordinatesUp(Coordinates coordinates)

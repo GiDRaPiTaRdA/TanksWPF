@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Tanks.ActionModels;
-using Tanks.Models.Fields;
 using TraversalLib;
 
 namespace Tanks.Manager

@@ -1,15 +1,15 @@
-﻿using Tanks.Models.Fields;
+﻿using Tanks.Models.Units;
 
 namespace Tanks.ActionModels.RealModels
 {
     public class TankEnemy :ActionModel
     {
-        private static FieldState?[,] Map =>
-              new FieldState?[,]
+        private static UnitState?[,] Map =>
+              new UnitState?[,]
                           {
-                                {null,FieldState.TankEnemy,FieldState.TankEnemy },
-                                {FieldState.TankEnemy,FieldState.TankEnemy,null },
-                                {null,FieldState.TankEnemy,FieldState.TankEnemy }
+                                {null,UnitState.TankEnemy,UnitState.TankEnemy },
+                                {UnitState.DefaultCannon,UnitState.TankEnemy,null },
+                                {null,UnitState.TankEnemy,UnitState.TankEnemy }
                           }
                       ;
 

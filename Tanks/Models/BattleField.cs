@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Tanks.ActionModels;
-using Tanks.Models.Fields;
-using Tanks.Models.Fields.FieldTypes;
+using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
 namespace Tanks.Models
@@ -10,7 +9,7 @@ namespace Tanks.Models
     {
         public Coordinates Size { get; }
 
-        public FieldSlot[,] SpotsMatrix { get; private set; }
+        public UnitSlot[,] SpotsMatrix { get; private set; }
 
         public Dictionary<int, ActionModel> Models { get; private set; }
 
@@ -25,30 +24,33 @@ namespace Tanks.Models
         {
             this.Models = new Dictionary<int, ActionModel>();
 
-            this.SpotsMatrix = new FieldSlot[this.Size.X, this.Size.Y];
+            this.SpotsMatrix = new UnitSlot[this.Size.X, this.Size.Y];
 
-            this.SpotsMatrix.Traversal((o, ps) => this[ps[0], ps[1]] = new FieldSlot(new EmptyField(ps[0], ps[1])));
+            this.SpotsMatrix.Traversal((o, ps) => this[ps[0], ps[1]] = new UnitSlot(new EmptyUnit(ps[0], ps[1])));
         }
 
-        #region Field operations
-        public void PushField(AbstractField field)
+        #region unit operations
+        public void PushField(AbstractUnit unit)
         {
-            if (field.FieldPointState!=null)
+            if (
+                unit.UnitPointState!=null &&
+                unit.Coordinates!=null
+                )
             {
-                this[field.Coordinates].Push(field);
+                this[unit.Coordinates].Push(unit);
             }
         }
-        public void PopField(AbstractField field)
+        public void PopField(AbstractUnit unit)
         {
-            if (field.FieldPointState != null)
+            if (unit.UnitPointState != null)
             {
-                this[field.Coordinates].Pop(field);
+                this[unit.Coordinates].Pop(unit);
             }
         }
 
         public void SetMap(ModelMap map)
         {
-            map.ModelFields.Traversal((o, ps) => this.PushField((AbstractField)o));
+            map.ModelUnits.Traversal((o, ps) => this.PushField((AbstractUnit)o));
         }
         #endregion
 
@@ -56,21 +58,21 @@ namespace Tanks.Models
         public void PushModel(ActionModel model)
         {
             this.Models.Add(model.GetHashCode(), model);
-            model.ModelMap.ModelFields.ForEach<AbstractField>(this.PushField);
+            model.ModelMap.ModelUnits.ForEach<AbstractUnit>(this.PushField);
         }
         public void PopModel(ActionModel model)
         {
             this.Models.Remove(model.GetHashCode());
-            model.ModelMap.ModelFields.ForEach<AbstractField>(this.PopField);
+            model.ModelMap.ModelUnits.ForEach<AbstractUnit>(this.PopField);
         }
         #endregion
 
         #region Indexators
-        public FieldSlot this[Coordinates coordinates]
+        public UnitSlot this[Coordinates coordinates]
         {
             get
             {
-                FieldSlot slot = this[coordinates.X, coordinates.Y];
+                UnitSlot slot = this[coordinates.X, coordinates.Y];
                 return slot;
             }
             private set
@@ -80,11 +82,11 @@ namespace Tanks.Models
 
         }
 
-        public FieldSlot this[int x, int y]
+        public UnitSlot this[int x, int y]
         {
             get
             {
-                FieldSlot slot = this.SpotsMatrix[x, y];
+                UnitSlot slot = this.SpotsMatrix[x, y];
                 return slot;
             }
             private set

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using Tanks.Manager;
 using Tanks.Models;
-using Tanks.Models.Fields;
 using PropertyChanged;
-using Tanks.Models.Fields.FieldTypes;
+using Tanks.Models.Units;
+using Tanks.Models.Units.UnitModels;
 
 namespace Tanks.ActionModels
 {
@@ -17,7 +17,7 @@ namespace Tanks.ActionModels
     {
         public ModelMap ModelMap { get; set; }
 
-        private static FieldState[] AllowedToSpawn => new[] { FieldState.EmptyField };
+        private static UnitState[] AllowedToSpawn => new[] { UnitState.EmptyUnit };
 
         protected ActionModel(ModelMap modelMap)
         {
@@ -28,11 +28,11 @@ namespace Tanks.ActionModels
         #region Initialize & Spawn
         public void Initialize(BattleField battleField)
         {
-            FieldSlot temp = this.FindOrigiSlotForInsert(battleField);
+            UnitSlot temp = this.FindOrigiSlotForInsert(battleField);
 
             if (temp != null)
             {
-                this.Spawn(battleField, temp.Field.Coordinates);
+                this.Spawn(battleField, temp.Unit.Coordinates);
             }
             else
             {
@@ -51,28 +51,29 @@ namespace Tanks.ActionModels
 
                     if (this.ModelMap.ModelPattern[i, j] != null)
                     {
-                        AbstractField field = this.ModelMap.ModelPattern[i, j].GenerateInstance(coordinates);
+                        AbstractUnit unit = this.ModelMap.ModelPattern[i, j].GenerateInstance(coordinates);
 
                         // Add to ModelsFields
-                        this.ModelMap.ModelFields[i, j] = field;
+                        this.ModelMap.ModelUnits[i, j] = unit;
 
                         // Set to BattleField
-                        battleField.PushField(field);
+                        //battleField.PushField(unit);
                     }
                     else
                     {
-                        this.ModelMap.ModelFields[i, j] = new NullField(coordinates);
+                        this.ModelMap.ModelUnits[i, j] = new NullUnit(coordinates);
                     }
                 }
             }
+            battleField.PushModel(this);
         }
 
-        private FieldSlot FindOrigiSlotForInsert(BattleField battleField)
+        private UnitSlot FindOrigiSlotForInsert(BattleField battleField)
         {
-            FieldSlot slot = null;
+            UnitSlot slot = null;
 
-            int RangeX = battleField.Size.X - this.ModelMap.ModelFields.GetLength(0) + 1;
-            int RangeY = battleField.Size.Y - this.ModelMap.ModelFields.GetLength(1) + 1;
+            int RangeX = battleField.Size.X - this.ModelMap.ModelUnits.GetLength(0) + 1;
+            int RangeY = battleField.Size.Y - this.ModelMap.ModelUnits.GetLength(1) + 1;
 
             for (int i = 0; i < RangeX; i++)
             {
@@ -80,7 +81,7 @@ namespace Tanks.ActionModels
                 {
                     var fieldSlot = battleField[i, j];
 
-                    var result = this.CheckCanSpawn(battleField, fieldSlot.Field.Coordinates);
+                    var result = this.CheckCanSpawn(battleField, fieldSlot.Unit.Coordinates);
 
                     if (result)
                     {

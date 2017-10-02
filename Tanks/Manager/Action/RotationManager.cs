@@ -1,11 +1,10 @@
 ﻿using System;
 using Tanks.ActionModels;
 using Tanks.Models;
-using Tanks.Models.Fields;
-using Tanks.Models.Fields.FieldTypes;
+using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
-namespace Tanks.Manager
+namespace Tanks.Manager.Action
 {
     public class RotationManager
     {
@@ -16,16 +15,20 @@ namespace Tanks.Manager
             this.BattleField = battleField;
         }
 
+
         private void RotateModel(ActionModel model, Dirrection dirrection)
         {
-            // Pop Model
-            this.BattleField.PopModel(model);
+            if (ActionManager.CanAct(model,this.BattleField))
+            {
+                // Pop Model
+                this.BattleField.PopModel(model);
 
-            // Rotate Model
-            model.ModelMap = this.AimMap(model.ModelMap,dirrection);
+                // Rotate Model
+                model.ModelMap = this.AimMap(model.ModelMap, dirrection);
 
-            // Push Model
-            this.BattleField.PushModel(model);
+                // Push Model
+                this.BattleField.PushModel(model);
+            }
         }
 
         public void RotateForward(ActionModel model)
@@ -76,11 +79,11 @@ namespace Tanks.Manager
                 {
                     case 0:
                         // Vertical mirror
-                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelFields, Array2DManager.MirrorVertical));
+                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelUnits, Array2DManager.MirrorVertical));
                         break;
                     case 1:
                         // Horisontal mirror
-                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelFields, Array2DManager.MirrorHorisontal));
+                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelUnits, Array2DManager.MirrorHorisontal));
                         break;
                     default:
                         throw new Exception("Algorithmic Error");
@@ -97,12 +100,12 @@ namespace Tanks.Manager
                 {
                     case 1:
                         // Right
-                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelFields, Array2DManager.RotateRight));
+                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelUnits, Array2DManager.RotateRight));
 
                         break;
                     case -1:
                         // Left
-                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelFields, Array2DManager.RotateLeft));
+                        aimedMap = new ModelMap(currentMap.ModelPattern, targetDirrecion, this.RotateWithNull(currentMap.ModelUnits, Array2DManager.RotateLeft));
                         break;
                     default:
                         throw new Exception("Algorithmic Error");
@@ -112,7 +115,7 @@ namespace Tanks.Manager
             return aimedMap;
         }
 
-        private AbstractField[,] RotateWithNull(AbstractField[,] array, Func<AbstractField[,], AbstractField[,]> rotate)
+        private AbstractUnit[,] RotateWithNull(AbstractUnit[,] array, Func<AbstractUnit[,], AbstractUnit[,]> rotate)
         {
             // Rotate array
             var rotatedArray = rotate(array);

@@ -44,7 +44,7 @@ namespace Tanks.View.UserInterface
                     Grid.SetRow(uiElement, j);
                     parrent.Children.Add(uiElement);
 
-                    // Assign Field
+                    // Assign unit
                     space[i, j] = uiElement;
                 }
             }
@@ -52,9 +52,9 @@ namespace Tanks.View.UserInterface
             return space;
         }
 
-        //public AbstractField[,] CreateMatrix<T, FieldType>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
+        //public AbstractUnit[,] CreateMatrix<T, FieldType>(int x, int y, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractUnit
         //{
-        //    AbstractField[,] space = new AbstractField[x, y];
+        //    AbstractUnit[,] space = new AbstractUnit[x, y];
 
         //    // Add columns X
         //    for (int i = 0; i < x; i++)
@@ -85,7 +85,7 @@ namespace Tanks.View.UserInterface
         //            Grid.SetRow(uiElement, j);
         //            parrent.Children.Add(uiElement);
 
-        //            // Assign Field
+        //            // Assign unit
         //            space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType),i,j,uiElement);
         //        }
         //    }
@@ -93,7 +93,7 @@ namespace Tanks.View.UserInterface
         //    return space;
         //}
 
-        //public AbstractField[,] CreateMatrix<T, FieldType>(AbstractField[,] space, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractField
+        //public AbstractUnit[,] CreateMatrix<T, FieldType>(AbstractUnit[,] space, Grid parrent, Action<Control> modify = null) where T : Control where FieldType : AbstractUnit
         //{
         //    int x = space.GetLength(0);
         //    int y = space.GetLength(1);
@@ -127,7 +127,7 @@ namespace Tanks.View.UserInterface
         //            Grid.SetRow(uiElement, j);
         //            parrent.Children.Add(uiElement);
 
-        //            // Assign Field
+        //            // Assign unit
         //            space[i, j] = (FieldType)Activator.CreateInstance(typeof(FieldType),i,j, uiElement);
         //        }
         //    }

@@ -1,17 +1,17 @@
 ﻿using System;
-using Tanks.Models.Fields;
+using Tanks.Models.Units;
 
 namespace Tanks.Dictionary
 {
     class ResourceTypeAttribute :Attribute
     {
-        public ResourceTypeAttribute(FieldState state,DictionaryType key)
+        public ResourceTypeAttribute(UnitState state,DictionaryType key)
         {
             this.State = state;
             this.Key = key;
         }
 
         public DictionaryType Key { get; set; }
-        public FieldState State { get; set; }
+        public UnitState State { get; set; }
     }
 }
