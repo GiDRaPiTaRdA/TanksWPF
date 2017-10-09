@@ -3,6 +3,7 @@ using Tanks.Manager.Action.Managers;
 using Tanks.Models;
 using Tanks.Models.Units.Interfaces;
 using Tanks.Models.Units.UnitModels;
+using Tanks.Models.Units.UnitModels.Cannons;
 using TraversalLib;
 
 namespace Tanks.Manager.Action
@@ -17,12 +18,15 @@ namespace Tanks.Manager.Action
 
         private SpawnManager SpawnManager { get; set; }
 
+        private WeaponManager WeaponManager { get; set; }
+
         public ActionManager(BattleField battleField)
         {
             this.MovementManager = new MotionManager(battleField);
             this.RotationManager = new RotationManager(battleField);
             this.FightManager =  new FigthManager(battleField);
             this.SpawnManager = new SpawnManager(battleField);
+            this.WeaponManager =  new WeaponManager(battleField);
         }
 
 
@@ -31,7 +35,7 @@ namespace Tanks.Manager.Action
             bool canMove =
                unit?.Coordinates != null &&
               
-               ((battleField[unit.Coordinates].Units.Contains(unit) && unit is ISolid) ^
+               ((battleField[unit.Coordinates].Units.Contains(unit) && unit is AbstractUnit) ^
                unit.UnitPointState == null);
             return canMove;
         }
@@ -103,6 +107,11 @@ namespace Tanks.Manager.Action
         public void Fire(ActionModel model)
         {
             this.FightManager.Fire(model);
+        }
+
+        public void ChangeWeapon<TCannon>(ActionModel model) where TCannon : ICannon
+        {
+            this.WeaponManager.ChangeWeapon<TCannon>(model);
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace Tanks.Models.Units.UnitModels
 
         protected AbstractUnit(Coordinates coordinates = null)
         {
-            this.Coordinates = coordinates;
+            this.Initialize(coordinates);
 
             this.UnitPointState = this.GetState();
         }

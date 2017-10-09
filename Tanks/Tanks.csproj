@@ -111,11 +111,14 @@
     <Compile Include="Manager\Action\Managers\RotationManager.cs" />
     <Compile Include="Models\Coodrinates.cs" />
     <Compile Include="Models\UnitSlot.cs" />
+    <Compile Include="Models\Units\Interfaces\ICannon.cs" />
     <Compile Include="Models\Units\Interfaces\IMissleBehavior.cs" />
     <Compile Include="Models\Units\UnitGen.cs" />
     <Compile Include="Models\Units\UnitModels\BasicUnits\Cannon.cs" />
     <Compile Include="Models\Units\UnitModels\BasicUnits\Missle.cs" />
     <Compile Include="Models\Units\UnitModels\BasicUnits\Solid.cs" />
+    <Compile Include="Models\Units\UnitModels\BrickUnit.cs" />
+    <Compile Include="Models\Units\UnitModels\CannonBall.cs" />
     <Compile Include="Models\Units\UnitModels\Cannons\BrickCannon.cs" />
     <Compile Include="Models\Units\UnitModels\MissleBehaviors\BrickBehavior.cs" />
     <Compile Include="Models\Units\UnitModels\MissleBehaviors\MissleBehavior.cs" />

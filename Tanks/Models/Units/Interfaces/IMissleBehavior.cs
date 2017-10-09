@@ -12,7 +12,7 @@ namespace Tanks.Models.Units.Interfaces
         bool IsRemoteControlled { get; set; }
 
         void Interact(
-             Solid unit,
+             AbstractUnit unit,
              MotionManager motionManager,
              DestructionManager destructionManager,
              BattleField battleField,

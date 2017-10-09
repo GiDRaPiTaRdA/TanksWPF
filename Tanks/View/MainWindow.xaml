@@ -17,17 +17,26 @@
     </Window.Resources>
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding Path=MoveUpCommandQ}" Key="W" />
-        <KeyBinding Command="{Binding Path=MoveDownCommandQ}" Key="S" />
-        <KeyBinding Command="{Binding Path=MoveLeftCommandQ}" Key="A" />
-        <KeyBinding Command="{Binding Path=MoveRightCommandQ}" Key="D" />
 
+        <!--Tank #1-->
         <KeyBinding Command="{Binding Path=MoveUpCommand}" Key="Up" />
         <KeyBinding Command="{Binding Path=MoveDownCommand}" Key="Down" />
         <KeyBinding Command="{Binding Path=MoveLeftCommand}" Key="Left" />
         <KeyBinding Command="{Binding Path=MoveRightCommand}" Key="Right" />
 
-        <KeyBinding Command="{Binding Path=DebugCommand}" Key="NumPad0" />
+        <KeyBinding Command="{Binding Path=FireCommand}" Key="NumPad0" />
+
+        <!--Tank #2-->
+        <KeyBinding Command="{Binding Path=MoveUpCommandQ}" Key="W" />
+        <KeyBinding Command="{Binding Path=MoveDownCommandQ}" Key="S" />
+        <KeyBinding Command="{Binding Path=MoveLeftCommandQ}" Key="A" />
+        <KeyBinding Command="{Binding Path=MoveRightCommandQ}" Key="D" />
+
+        <KeyBinding Command="{Binding Path=FireCommandQ}" Key="F" />
+
+        <KeyBinding Command="{Binding Path=DebugCommand1}" Key="NumPad1" />
+        <KeyBinding Command="{Binding Path=DebugCommand2}" Key="NumPad2" />
+        
     </Window.InputBindings>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

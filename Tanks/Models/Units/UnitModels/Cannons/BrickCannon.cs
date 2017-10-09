@@ -1,18 +1,21 @@
-﻿using Tanks.Models.Units.UnitModels.BasicUnits;
+﻿using System.Collections.Generic;
+using Tanks.Models.Units.UnitModels.BasicUnits;
+using Tanks.Models.Units.UnitModels.MissleBehaviors;
 using Tanks.Models.Units.UnitModels.Missles;
 
 namespace Tanks.Models.Units.UnitModels.Cannons
 {
     [UnitState(UnitState.BrickCannon)]
-    public class BrickCannon :Cannon
+    public class BrickCannon :Cannon<Missle>
     {
         public BrickCannon(Coordinates coordinates) : base(coordinates)
         {
-        }
+            this.ChargesStack = new Stack<Missle>();
 
-        public override Missle GetMissle(Coordinates coordinates)
-        {
-            return new BrickMissle(coordinates);
+            for (int i = 0; i < 5; i++)
+            {
+                this.ChargesStack.Push(new BrickMissle());
+            }
         }
     }
 }

@@ -12,13 +12,13 @@
         Wall,
 
         DefaultCannon,
-        CannonBallMissle,
+        CannonBall,
 
         RemoteContolledCannon,
         RemoteContolledMissle,
 
         BrickCannon,
-        BrickMissle,
+        Brick,
 
         RemoteControlledBrickCannon,
         RemoteControlledBrickMissle

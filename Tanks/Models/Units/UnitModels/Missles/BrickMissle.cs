@@ -9,13 +9,8 @@ using Tanks.Models.Units.UnitModels.MissleBehaviors;
 
 namespace Tanks.Models.Units.UnitModels.Missles
 {
-    [UnitState(UnitState.BrickMissle)]
     public class BrickMissle : Missle
     {
-        public BrickMissle(){}
-        public BrickMissle(Coordinates coordinates) : base(coordinates, new BrickBehavior())
-        {
-            this.MissleBehavior = new MissleBehavior();
-        }
+        public BrickMissle() : base(new BrickUnit(), new BrickBehavior()) { }
     }
 }

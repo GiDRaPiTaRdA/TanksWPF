@@ -16,18 +16,15 @@ namespace Tanks.Manager.Action.Managers
         {
         }
 
-        public void ChangeWeapon<TWeapon>(ActionModel model) where TWeapon : Cannon
+        public void ChangeWeapon<TWeapon>(ActionModel model) where TWeapon : ICannon
         {
-           // List<Coordinates> weaponCoordinates = new List<Coordinates>();
-
 
             model.ModelMap.ModelUnits.Traversal((o, ps) =>
             {
                 AbstractUnit unit = (AbstractUnit) o;
 
-                if (o is Cannon)
+                if (o is ICannon)
                 {
-                   // weaponCoordinates.Add(new Coordinates(ps[0], ps[1]));
 
                     this.BattleField[unit.Coordinates].Pop(unit);
                     this.BattleField[unit.Coordinates].Push((AbstractUnit) Activator.CreateInstance(typeof (TWeapon), unit.Coordinates));
@@ -36,11 +33,6 @@ namespace Tanks.Manager.Action.Managers
                 }
 
             });
-
-
-          //  weaponCoordinates.ForEach((c) => model.ModelMap.ModelUnits[c.X, c.Y] = (AbstractUnit)Activator.CreateInstance(type, model.ModelMap.ModelUnits[c.X, c.Y].Coordinates));
-
-
         }
     }
 }

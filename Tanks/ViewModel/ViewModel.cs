@@ -62,41 +62,44 @@ namespace Tanks.ViewModel
         private DelegateCommand moveRightCommand;
         private DelegateCommand moveDownCommand;
         private DelegateCommand moveLeftCommand;
+        private DelegateCommand fireCommand;
 
         public DelegateCommand MoveUpCommand => this.moveUpCommand ?? (this.moveUpCommand = new DelegateCommand(() => this.ActionManager.GoUp(this.Tank)));
         public DelegateCommand MoveDownCommand => this.moveDownCommand ?? (this.moveDownCommand = new DelegateCommand(() => this.ActionManager.GoDown(this.Tank)));
         public DelegateCommand MoveLeftCommand => this.moveLeftCommand ?? (this.moveLeftCommand = new DelegateCommand(() => this.ActionManager.GoLeft(this.Tank)));
         public DelegateCommand MoveRightCommand => this.moveRightCommand ?? (this.moveRightCommand = new DelegateCommand(() => this.ActionManager.GoRight(this.Tank)));
-
+        public DelegateCommand FireCommand => this.fireCommand ?? (this.fireCommand = new DelegateCommand(()=>this.ActionManager.Fire(this.Tank)));
 
         private DelegateCommand moveUpCommandQ;
         private DelegateCommand moveRightCommandQ;
         private DelegateCommand moveDownCommandQ;
         private DelegateCommand moveLeftCommandQ;
+        private DelegateCommand fireCommandQ;
 
-        public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.ActionManager.GoUp(this.Tank1)));
-        public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.ActionManager.GoDown(this.Tank1)));
-        public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.ActionManager.GoLeft(this.Tank1)));
-        public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.ActionManager.GoRight(this.Tank1)));
-
-        //public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.ActionManager.GoUp(this.Tank2)));
-        //public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.ActionManager.GoDown(this.Tank2)));
-        //public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.ActionManager.GoLeft(this.Tank2)));
-        //public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.ActionManager.GoRight(this.Tank2)));
-
+        public DelegateCommand MoveUpCommandQ => this.moveUpCommandQ ?? (this.moveUpCommandQ = new DelegateCommand(() => this.ActionManager.GoUp(this.Tank2)));
+        public DelegateCommand MoveDownCommandQ => this.moveDownCommandQ ?? (this.moveDownCommandQ = new DelegateCommand(() => this.ActionManager.GoDown(this.Tank2)));
+        public DelegateCommand MoveLeftCommandQ => this.moveLeftCommandQ ?? (this.moveLeftCommandQ = new DelegateCommand(() => this.ActionManager.GoLeft(this.Tank2)));
+        public DelegateCommand MoveRightCommandQ => this.moveRightCommandQ ?? (this.moveRightCommandQ = new DelegateCommand(() => this.ActionManager.GoRight(this.Tank2)));
+        public DelegateCommand FireCommandQ => this.fireCommandQ ?? (this.fireCommandQ = new DelegateCommand(() => this.ActionManager.Fire(this.Tank2)));
         #endregion Delegate commands
 
 
         #region Debug
-        private DelegateCommand debugCommand;
-        public DelegateCommand DebugCommand => this.debugCommand ?? (this.debugCommand = new DelegateCommand(this.Debug));
+        private DelegateCommand debugCommand1;
+        public DelegateCommand DebugCommand1 => this.debugCommand1 ?? (this.debugCommand1 = new DelegateCommand(this.Debug1));
+
+        private DelegateCommand debugCommand2;
+        public DelegateCommand DebugCommand2 => this.debugCommand2 ?? (this.debugCommand2 = new DelegateCommand(this.Debug2));
 
 
-        private void Debug()
+        private void Debug1()
         {
-            this.ActionManager.Fire(this.Tank);
+            this.ActionManager.ChangeWeapon<BrickCannon>(this.Tank);        
+        }
 
-            
+        private void Debug2()
+        {
+            this.ActionManager.ChangeWeapon<DefaultCannon>(this.Tank);
         }
         #endregion
     }

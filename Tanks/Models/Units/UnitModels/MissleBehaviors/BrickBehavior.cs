@@ -10,7 +10,7 @@ namespace Tanks.Models.Units.UnitModels.MissleBehaviors
     {
         public bool IsRemoteControlled { get; set; }
 
-        public void Interact(Solid unit, MotionManager motionManager, DestructionManager destructionManager,
+        public void Interact(AbstractUnit unit, MotionManager motionManager, DestructionManager destructionManager,
             BattleField battleField, Dirrection modelDirrection, Dirrection motionDirrection, Action stopAction)
         {
             Dirrection dirrection = this.IsRemoteControlled ? modelDirrection : motionDirrection;

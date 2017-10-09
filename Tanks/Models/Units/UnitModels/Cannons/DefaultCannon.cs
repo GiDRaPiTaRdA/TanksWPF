@@ -8,41 +8,16 @@ using Tanks.Models.Units.UnitModels.Missles;
 namespace Tanks.Models.Units.UnitModels.Cannons
 {
     [UnitState(UnitState.DefaultCannon)]
-    public class DefaultCannon : Cannon
+    public class DefaultCannon : Cannon<CanonBallMissle>
     {
-       
-
         public DefaultCannon(Coordinates coordinates) : base(coordinates)
         {
-            this.ChargesStack = new Stack<Solid>();
+            this.ChargesStack = new Stack<CanonBallMissle>();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
-                this.ChargesStack.Push(new CanonBallMissle()
-                {
-                    MissleBehavior = new MissleBehavior()
-                });
+                this.ChargesStack.Push(new CanonBallMissle());
             }
-
-            for (int i = 0; i < 5; i++)
-            {
-                this.ChargesStack.Push(new BrickMissle()
-                {
-                    MissleBehavior = new BrickBehavior()
-                });
-            }
-
-        }
-
-
-        public override Missle GetMissle(Coordinates coordinates)
-        {
-            Missle missle = null;
-
-            if (this.ChargesStack.Any())
-                missle = this.ChargesStack.Pop().Initialize(coordinates) as Missle;
-
-            return missle;
         }
     }
 }

@@ -7,30 +7,30 @@ using Tanks.Models.Units.UnitModels.MissleBehaviors;
 
 namespace Tanks.Models.Units.UnitModels.BasicUnits
 {
-    public abstract class Missle : Solid, IMissle
-    {
-        public IMissleBehavior MissleBehavior { get; set; }
+    //public abstract class Missle : Solid, IMissle
+    //{
+    //    public IMissleBehavior MissleBehavior { get; set; }
 
-        public Missle() { }
-        public Missle(IMissleBehavior behavoir) 
-        {
-            this.MissleBehavior = behavoir;
-        }
-        public Missle(Coordinates coordinates) : this(coordinates, new BrickBehavior()) { }
-        public Missle(Coordinates coordinates, IMissleBehavior behavoir) : base(coordinates)
-        {
-            this.MissleBehavior = behavoir;
-        }
+    //    public Missle() { }
+    //    public Missle(IMissleBehavior behavoir) 
+    //    {
+    //        this.MissleBehavior = behavoir;
+    //    }
+    //    public Missle(Coordinates coordinates) : this(coordinates, new BrickBehavior()) { }
+    //    public Missle(Coordinates coordinates, IMissleBehavior behavoir) : base(coordinates)
+    //    {
+    //        this.MissleBehavior = behavoir;
+    //    }
 
        
-    }
+    //}
 
-    public sealed class MissleWrapper : IMissle
+    public class Missle : IMissle
     {
         public IMissleBehavior MissleBehavior { get; set; }
-        public Solid Unit { get; }
+        public AbstractUnit Unit { get; }
 
-        public MissleWrapper(Solid solidUnit, IMissleBehavior behavoir)
+        public Missle(AbstractUnit solidUnit, IMissleBehavior behavoir)
         {
             this.Unit = solidUnit;
             this.MissleBehavior = behavoir;

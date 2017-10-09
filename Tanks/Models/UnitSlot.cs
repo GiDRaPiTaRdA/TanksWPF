@@ -23,7 +23,7 @@ namespace Tanks.Models
 
         public List<AbstractUnit> Units { get; }
 
-        public AbstractUnit Unit =>  this.Units.Last();
+        public AbstractUnit Unit => this.Units.Last();
 
         public UnitState? State => this.Unit.UnitPointState;
 

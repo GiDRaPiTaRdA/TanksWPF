@@ -17,8 +17,6 @@ namespace Tanks.ActionModels
     {
         public ModelMap ModelMap { get; set; }
 
-       
-
         protected ActionModel(ModelMap modelMap)
         {
             this.ModelMap = modelMap;
