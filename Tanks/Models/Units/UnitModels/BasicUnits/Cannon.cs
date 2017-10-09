@@ -1,12 +1,13 @@
-﻿using Tanks.Models.Units.Interfaces;
+﻿using System.Collections.Generic;
+using Tanks.Models.Units.Interfaces;
 
 namespace Tanks.Models.Units.UnitModels.BasicUnits
 {
-    public abstract class Cannon: AbstractUnit, ISolid
+    public abstract class Cannon: Solid 
     {
-        public Cannon(Coordinates coordinates) : base(coordinates)
-        {
-        }
+        public Stack<Solid> ChargesStack { get; protected set; }
+
+        public Cannon(Coordinates coordinates) : base(coordinates){}
 
         public abstract Missle GetMissle(Coordinates coordinates);
     }

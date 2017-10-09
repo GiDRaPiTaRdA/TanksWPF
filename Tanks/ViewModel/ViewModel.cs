@@ -40,9 +40,9 @@ namespace Tanks.ViewModel
             this.ActionManager.Spawn(this.Tank);
             this.ActionManager.Spawn(this.Tank2);
 
-            WeaponManager weaponManager = new WeaponManager(this.BattleField);
+            //WeaponManager weaponManager = new WeaponManager(this.BattleField);
 
-            weaponManager.ChangeWeapon<BrickCannon>(this.Tank);
+            //weaponManager.ChangeWeapon<BrickCannon>(this.Tank);
 
 
             this.BattleField.PushField(this.Tank1);

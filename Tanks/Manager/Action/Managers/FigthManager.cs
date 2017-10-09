@@ -36,18 +36,22 @@ namespace Tanks.Manager.Action.Managers
                     {
                         Missle missle = (f as Cannon).GetMissle(coords);
 
-                        this.BattleField.PushField(missle);
+                        if (missle != null)
+                        {
 
-                        new Motion(missle, model.ModelMap.Dirrection,
-                            (m, motionDirrection, stopAction) => m.Interact(
-                                this.MotionManager,
-                                this.DestructionManager,
-                                this.BattleField,
-                                model.ModelMap.Dirrection,
-                                motionDirrection,
-                                stopAction
-                                )
+                            this.BattleField.PushField(missle);
+
+                            new Motion(missle, model.ModelMap.Dirrection,
+                                (m, motionDirrection, stopAction) => m.MissleBehavior.Interact(missle,
+                                    this.MotionManager,
+                                    this.DestructionManager,
+                                    this.BattleField,
+                                    model.ModelMap.Dirrection,
+                                    motionDirrection,
+                                    stopAction
+                                    )
                                 ).Start();
+                        }
                     }
                 });
         }
@@ -57,10 +61,10 @@ namespace Tanks.Manager.Action.Managers
     class Motion
     {
         readonly Timer timer;
-        IMissile Missle { get; }
+        IMissle Missle { get; }
         Dirrection MotionDirrection { get; }
 
-        public Motion(IMissile missle, Dirrection motionDirrection, Action<IMissile, Dirrection, System.Action> interact, int frequancy = 200)
+        public Motion(IMissle missle, Dirrection motionDirrection, Action<IMissle, Dirrection, System.Action> interact, int frequancy = 200)
         {
             this.Missle = missle;
             this.MotionDirrection = motionDirrection;

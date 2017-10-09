@@ -3,43 +3,37 @@ using Tanks.ActionModels;
 using Tanks.Manager.Action;
 using Tanks.Manager.Action.Managers;
 using Tanks.Models.Units.Interfaces;
+using Tanks.Models.Units.UnitModels.MissleBehaviors;
 
 namespace Tanks.Models.Units.UnitModels.BasicUnits
 {
-    public abstract class Missle : AbstractUnit, ISolid, IMissile
+    public abstract class Missle : Solid, IMissle
     {
-        public Missle(Coordinates coordinates) : base(coordinates)
+        public IMissleBehavior MissleBehavior { get; set; }
+
+        public Missle() { }
+        public Missle(IMissleBehavior behavoir) 
         {
+            this.MissleBehavior = behavoir;
+        }
+        public Missle(Coordinates coordinates) : this(coordinates, new BrickBehavior()) { }
+        public Missle(Coordinates coordinates, IMissleBehavior behavoir) : base(coordinates)
+        {
+            this.MissleBehavior = behavoir;
         }
 
-        public virtual void Interact(
-            MotionManager motionManager,
-            DestructionManager destructionManager,
-            BattleField battleField,
-            Dirrection modelDirrection,
-            Dirrection motionDirrection, Action stopAction)
+       
+    }
+
+    public sealed class MissleWrapper : IMissle
+    {
+        public IMissleBehavior MissleBehavior { get; set; }
+        public Solid Unit { get; }
+
+        public MissleWrapper(Solid solidUnit, IMissleBehavior behavoir)
         {
-            var result = motionManager.Move(this, motionDirrection);
-
-            CoordinatesManager coordinatesManager = new CoordinatesManager(battleField.Size);
-
-            Coordinates coords = coordinatesManager.GetCoordinates(this.Coordinates, motionDirrection);
-
-            if (!result && coords != null)
-            {
-                var field = battleField[coords].Unit;
-                if (field != null)
-                {
-                    destructionManager.WhatToDestroy(field);
-                    destructionManager.Destroy(this);
-                    stopAction();
-                }
-            }
-            else if (!result)
-            {
-                destructionManager.Destroy(this);
-                stopAction();
-            }
+            this.Unit = solidUnit;
+            this.MissleBehavior = behavoir;
         }
     }
 }

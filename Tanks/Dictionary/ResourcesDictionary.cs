@@ -20,13 +20,8 @@ namespace Tanks.Dictionary
 
 
         [ResourceType(UnitState.BrickCannon, DictionaryType.Color)]public static Color FpColorBrickCannon => Colors.CornflowerBlue;
-        [ResourceType(UnitState.BrickMissle, DictionaryType.Color)]public static Color FpColorBrickMissle => Colors.Red;
+        [ResourceType(UnitState.BrickMissle, DictionaryType.Color)]public static Color FpColorBrickMissle => Colors.SaddleBrown;
 
-        [ResourceType(UnitState.RemoteControlledBrickCannon, DictionaryType.Color)]public static Color FpColorRcBrickCannon => Colors.CornflowerBlue;
-        [ResourceType(UnitState.RemoteControlledBrickMissle, DictionaryType.Color)]public static Color FpColorRcBrickMissle => Colors.Red;
-
-        [ResourceType(UnitState.RemoteContolledCannon, DictionaryType.Color)]public static Color FpColorRcCannon => Colors.CornflowerBlue;
-        [ResourceType(UnitState.RemoteContolledMissle, DictionaryType.Color)]public static Color FpColorRcCannonBall => Colors.Red;
 
         public static object GetDictionaryElement(UnitState state,DictionaryType key)
         {
