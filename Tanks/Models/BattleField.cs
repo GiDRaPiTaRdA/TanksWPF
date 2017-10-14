@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Tanks.ActionModels;
+using Tanks.Manager.Action.Managers;
 using Tanks.Models.Units.UnitModels;
 using TraversalLib;
 
@@ -13,6 +14,8 @@ namespace Tanks.Models
 
         public Dictionary<int, ActionModel> Models { get; private set; }
 
+        public List<Motion> Motions { get; private set; }
+
         public BattleField(int x, int y)
         {
             this.Size = new Coordinates(x, y);
@@ -24,12 +27,14 @@ namespace Tanks.Models
         {
             this.Models = new Dictionary<int, ActionModel>();
 
+            this.Motions =  new List<Motion>();
+
             this.SpotsMatrix = new UnitSlot[this.Size.X, this.Size.Y];
 
             this.SpotsMatrix.Traversal((o, ps) => this[ps[0], ps[1]] = new UnitSlot(new EmptyUnit(ps[0], ps[1])));
         }
 
-        #region unit operations
+        #region Unit operations
         public void PushField(AbstractUnit unit)
         {
             if (

@@ -12,7 +12,7 @@ namespace Tanks.Models.Units.UnitModels.Cannons
         {
             this.ChargesStack = new Stack<Missle>();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 100; i++)
             {
                 this.ChargesStack.Push(new BrickMissle());
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Drawing.Printing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Timers;
 using Tanks.ActionModels;
 using Tanks.Models;
@@ -37,32 +39,21 @@ namespace Tanks.Manager.Action.Managers
 
                             if (coords != null)
                             {
-                                if (!(this.BattleField[coords].Unit is ISolid))
+                                Missle missle = (f as ICannon).GetMissle(coords);
+
+                                if (missle != null)
                                 {
-                                    Missle missle = (f as ICannon).GetMissle(coords);
-
-                                    if (missle != null)
-                                    {
-
-                                        this.BattleField.PushField(missle.Unit);
-
-                                        new Motion(missle, model.ModelMap.Dirrection,
-                                            (m, motionDirrection, stopAction) => m.MissleBehavior.Interact(missle.Unit,
-                                                this.MotionManager,
-                                                this.DestructionManager,
-                                                this.BattleField,
-                                                model.ModelMap.Dirrection,
-                                                motionDirrection,
-                                                stopAction
-                                                )
+                                    new Motion(
+                                            missle,
+                                            model.ModelMap.Dirrection,
+                                            () => model.ModelMap.Dirrection,
+                                            this.MotionManager,
+                                            this.DestructionManager,
+                                            this.BattleField
                                             ).Start();
-                                    }
-                                }
-                                else
-                                {
-                                    throw new NotImplementedException("implement streight shot");
                                 }
                             }
+
                         });
             }
         }
@@ -73,30 +64,8 @@ namespace Tanks.Manager.Action.Managers
             return result;
         }
 
+       
     }
 
-    class Motion
-    {
-        readonly Timer timer;
-        IMissle Missle { get; }
-        Dirrection MotionDirrection { get; }
 
-        public Motion(IMissle missle, Dirrection motionDirrection, Action<IMissle, Dirrection, System.Action> interact, int frequancy = 200)
-        {
-            this.Missle = missle;
-            this.MotionDirrection = motionDirrection;
-            this.timer = new Timer { Interval = frequancy };
-            this.timer.Elapsed += (o, s) => interact(this.Missle, this.MotionDirrection, this.Stop);
-        }
-
-        public void Start()
-        {
-            this.timer.Start();
-        }
-
-        public void Stop()
-        {
-            this.timer.Stop();
-        }
-    }
 }

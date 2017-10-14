@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Windows;
 using Tanks.ActionModels;
 using Tanks.Manager.Action.Managers;
 using Tanks.Models.Units.Interfaces;
@@ -10,35 +13,69 @@ namespace Tanks.Models.Units.UnitModels.MissleBehaviors
     {
         public bool IsRemoteControlled { get; set; }
 
-        public void Interact(AbstractUnit unit,
-          MotionManager motionManager,
-          DestructionManager destructionManager,
-          BattleField battleField,
-          Dirrection modelDirrection,
-          Dirrection motionDirrection,
-          Action stopAction)
+        public void Collide(
+            AbstractUnit unit,
+            Dirrection motionDirrection,
+            Expression<Func<Dirrection>> modelDirrectionExpression,
+            MotionManager motionManager,
+            DestructionManager destructionManager,
+            BattleField battleField,
+            Action stopAction)
         {
-            Dirrection dirrection = this.IsRemoteControlled ? modelDirrection : motionDirrection;
-
-            var result = motionManager.Move(unit, dirrection);
+            Dirrection dirrection = this.IsRemoteControlled
+                ? modelDirrectionExpression.Compile().Invoke()
+                : motionDirrection;
 
             CoordinatesManager coordinatesManager = new CoordinatesManager(battleField.Size);
 
             Coordinates coords = coordinatesManager.GetCoordinates(unit.Coordinates, dirrection);
 
-            if (!result && coords != null)
+
+            if (coords != null)
             {
-                var field = battleField[coords].Unit;
-                if (field != null)
+                AbstractUnit nextUnit = battleField[coords].Unit;
+
+                var result = motionManager.Move(unit, dirrection);
+
+                // Hit solid object
+                if (!result)
                 {
-                    destructionManager.WhatToDestroy(field);
-                    destructionManager.Destroy(unit);
-                    stopAction();
+                    if (nextUnit is ISolid)
+                    {
+                        // Destroy object
+                        destructionManager.WhatToDestroy(nextUnit);
+
+                        // Self destruct
+                        destructionManager.Destroy(unit);
+                    }
                 }
             }
-            else if (!result)
+            // Reached the end of battlefield
+            else
             {
                 destructionManager.Destroy(unit);
+            }
+        }
+
+
+        public void Fire(
+            AbstractUnit unit,
+            Dirrection motionDirrection,
+            Expression<Func<Dirrection>> modelDirrectionExpression,
+            MotionManager motionManager,
+            DestructionManager destructionManager,
+            BattleField battleField,
+            Action stopAction)
+        {
+
+            if (!(battleField[unit.Coordinates].Unit is ISolid))
+            {
+                battleField[unit.Coordinates].Push(unit);
+            }
+            else
+            {
+                destructionManager.WhatToDestroy(battleField[unit.Coordinates].Unit);
+
                 stopAction();
             }
         }

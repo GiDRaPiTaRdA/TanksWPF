@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Tanks.ActionModels;
 using Tanks.Models;
 using Tanks.Models.Units.UnitModels;
@@ -10,7 +11,13 @@ namespace Tanks.Manager.Action.Managers
     {
         public DestructionManager(BattleField battleField) : base(battleField) { }
 
+        public event EventHandler OnDestroyUnit;
+        public event EventHandler OnDestroyModel;
 
+        /// <summary>
+        /// Destroies Unit or model according "does unit belongs model or not"
+        /// </summary>
+        /// <param name="unit"></param>
         public void WhatToDestroy(AbstractUnit unit)
         {
             var model = this.BattleField.Models.FirstOrDefault(m => m.Value.ModelMap.ModelUnits.Any<AbstractUnit>(f => f == unit)).Value;
@@ -29,6 +36,7 @@ namespace Tanks.Manager.Action.Managers
             if (ActionManager.CanAct(unit, this.BattleField))
             {
                 this.BattleField.PopField(unit);
+                this.OnDestroyUnit?.Invoke(unit, null);
             }
         }
 
@@ -37,8 +45,11 @@ namespace Tanks.Manager.Action.Managers
             if (ActionManager.CanAct(model, this.BattleField))
             {
                 this.BattleField.PopModel(model);
+                this.OnDestroyModel?.Invoke(model, null);
             }
         }
+
+
 
     }
 }

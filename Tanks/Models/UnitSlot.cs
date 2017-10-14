@@ -15,10 +15,13 @@ namespace Tanks.Models
     {
         public event EventHandler StateChanged;
 
+        private Object thisLock = new Object();
+
         public UnitSlot(AbstractUnit unit)
         {
             this.Units =  new List<AbstractUnit>();
             this.Push(unit);
+
         }
 
         public List<AbstractUnit> Units { get; }
@@ -30,18 +33,22 @@ namespace Tanks.Models
 
         public void Push(AbstractUnit unit)
         {
-            if (unit.UnitPointState != null)
-            {
-                this.Units.Add(unit);
-                this.OnFieldChanged();
-            }
+
+                if (unit.UnitPointState != null)
+                {
+                    this.Units.Add(unit);
+                    this.OnFieldChanged();
+                }
+            
         }
 
         public bool Pop(AbstractUnit unit)
         {
-            bool result = this.Units.Remove(unit);
-            this.OnFieldChanged();
-            return result;
+
+                bool result = this.Units.Remove(unit);
+                this.OnFieldChanged();
+                return result;
+            
         }
 
 

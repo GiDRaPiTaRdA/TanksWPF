@@ -14,7 +14,7 @@ namespace Tanks.Models.Units.UnitModels.Cannons
         {
             this.ChargesStack = new Stack<CanonBallMissle>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 this.ChargesStack.Push(new CanonBallMissle());
             }
