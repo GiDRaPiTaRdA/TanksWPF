@@ -56,53 +56,25 @@ namespace Tanks.Manager.Action
             this.SpawnManager.Initialize(model);
         }
 
-        public void GoUp(ActionModel model)
+
+        private void Go(ActionModel  model, Dirrection dirrection)
         {
-            if (model.ModelMap.Dirrection != Dirrection.Forward)
+            // Rotate
+            if (model.ModelMap.Dirrection != dirrection)
             {
-                this.RotationManager.RotateForward(model);
+                this.RotationManager.RotateModel(model, dirrection);
             }
+            // Move
             else
             {
-                this.MovementManager.MoveUp(model);
-            }
-        }
-        public void GoDown(ActionModel model)
-        {
-            if (model.ModelMap.Dirrection != Dirrection.Backward)
-            {
-                this.RotationManager.RotateBackward(model);
-            }
-            else
-            {
-                this.MovementManager.MoveDown(model);
+                this.MovementManager.Move(model, dirrection);
             }
 
         }
-        public void GoLeft(ActionModel model)
-        {
-            if (model.ModelMap.Dirrection != Dirrection.Left)
-            {
-                this.RotationManager.RotateLeft(model);
-            }
-            else
-            {
-                this.MovementManager.MoveLeft(model);
-            }
-
-        }
-        public void GoRight(ActionModel model)
-        {
-            if (model.ModelMap.Dirrection != Dirrection.Right)
-            {
-                this.RotationManager.RotateRight(model);
-            }
-            else
-            {
-                this.MovementManager.MoveRight(model);
-            }
-
-        }
+        public void GoUp(ActionModel model)=>this.Go(model,Dirrection.Forward);
+        public void GoDown(ActionModel model)=> this.Go(model, Dirrection.Backward);
+        public void GoLeft(ActionModel model)=>this.Go(model, Dirrection.Left);
+        public void GoRight(ActionModel model)=> this.Go(model, Dirrection.Right);
 
         public void Fire(ActionModel model)
         {

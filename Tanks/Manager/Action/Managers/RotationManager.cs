@@ -11,7 +11,7 @@ namespace Tanks.Manager.Action.Managers
         public RotationManager(BattleField battleField) : base(battleField) { }
 
 
-        private void RotateModel(ActionModel model, Dirrection dirrection)
+        public void RotateModel(ActionModel model, Dirrection dirrection)
         {
             if (ActionManager.CanAct(model,this.BattleField))
             {

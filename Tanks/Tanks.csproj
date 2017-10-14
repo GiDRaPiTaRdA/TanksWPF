@@ -101,6 +101,7 @@
     <Compile Include="ActionModels\RealModels\TankEnemy.cs" />
     <Compile Include="Manager\Action\ActionManager.cs" />
     <Compile Include="Manager\Action\Managers\DestructionManager.cs" />
+    <Compile Include="Manager\Action\Managers\DropManager.cs" />
     <Compile Include="Manager\Action\Managers\FigthManager.cs" />
     <Compile Include="Manager\Action\Managers\AbstractManagerBase.cs" />
     <Compile Include="Manager\Action\Managers\SpawnManager.cs" />

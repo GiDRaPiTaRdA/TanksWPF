@@ -48,8 +48,5 @@ namespace Tanks.Manager.Action.Managers
                 this.OnDestroyModel?.Invoke(model, null);
             }
         }
-
-
-
     }
 }
